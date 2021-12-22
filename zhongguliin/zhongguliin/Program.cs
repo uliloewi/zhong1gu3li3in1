@@ -58,13 +58,13 @@ namespace zhongguliin
                     {"祭","ɛɿ" },//重紐皆三等
                     {"泰","æɿ" },//皆一等
                     {"佳","ɛ" },//皆二等 
-                    {"皆","ai"},//皆二等
+                    {"皆","æi"},//皆二等
                     {"夬","æɿ"},//皆二等
-                    {"咍","ai" },//皆一開
-                    {"灰","ai" },//皆一合
+                    {"咍","ɒi" },//皆一開
+                    {"灰","ɒi" },//皆一合
                     {"廢","æɿ" },//皆三等
                     // 臻攝 
-                    {"眞","ɨn" },{"眞入","ɨt" },//重紐皆三等
+                    {"眞","ɨn" },{"眞入","ɨt" },//重紐皆三等，三A改i韻腹
                     {"臻","ən" },{"臻入","ət" },//皆三開
                     {"欣","on" },{"欣入","ot" },//皆三開
                     {"文","ən" },{"文入","ət" },//皆三合
@@ -76,12 +76,12 @@ namespace zhongguliin
                     {"桓","an" },{"桓入","at" },//皆一開
                     {"刪","an" },{"刪入","at" },//皆二等
                     {"山","æn" },{"山入","æt" },//皆二等
-                    {"元","an" },{"元入","at" },//皆三等
+                    {"元","ɒn" },{"元入","ɒt" },//皆三等
                     {"仙","æn" },{"仙入","æt" },//重紐皆三等
                     {"先","ɛn" },{"先入","ɛt" },//皆四等
                     // 效攝 
-                    {"蕭","æu" },//皆四開
-                    {"宵","au" },//重紐皆三開
+                    {"蕭","ɛu" },//皆四開
+                    {"宵","æu" },//重紐皆三開
                     {"肴","au" },//皆二開
                     {"豪","au" },//皆一開
                     // 果攝 
@@ -105,20 +105,20 @@ namespace zhongguliin
                     {"侯","u" },//皆一開
                     {"幽","iu" },//皆三A開
                     // 深攝 
-                    {"侵","əm" },{"侵入","əp" },//重紐皆三開
+                    {"侵","ɨm" },{"侵入","ɨp" },//重紐皆三開，三A改i韻腹
                     // 咸攝 
                     {"覃","ɒm" },{"覃入","ɒp" },//皆一開
                     {"談","am" },{"談入","ap" },//皆一開
                     {"咸","æm" },{"咸入","æp" },//皆二開
                     {"銜","am" },{"銜入","ap" },//皆二開
-                    {"凡","am" },{"凡入","ap" },//皆三合
+                    {"凡","ɒm" },{"凡入","ɒp" },//皆三合
                     {"鹽","æm" },{"鹽入","æp" },//重紐皆三開
-                    {"嚴","am" },{"嚴入","ap" },//皆三開
-                    {"添","am" },{"添入","ap" },//皆四開
+                    {"嚴","ɒm" },{"嚴入","ɒp" },//皆三開
+                    {"添","ɛm" },{"添入","ɛp" },//皆四開
                 };
 
 
-                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\Downloads\Guangyun_Langjin_pulish_Alphabetic.2.0.xlsx");
+                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\Downloads\1.xlsx");
                 Worksheet ws = wk.Worksheets[0];
 
                 var dt = ws.Cells.ExportDataTable(0, 0, 4000, 9);
@@ -135,13 +135,19 @@ namespace zhongguliin
                     string üinmu = dt.Rows[k][6].ToString().Contains("入") ? üin[dt.Rows[k][5].ToString().Substring(0, 1) + dt.Rows[k][6].ToString().Substring(0, 1)] : üin[dt.Rows[k][5].ToString().Substring(0, 1)];
                     string shengdiao = diao[dt.Rows[k][6].ToString()];
                     string inqüin = shengmu + üinshou + üinmu + shengdiao;
-                    string inzie = inqüin.Replace("ii", "i").Replace("uu", "u").Replace("yy", "y").Replace("ɨɨ", "ɨ").Replace("ʉʉ", "ʉ").Replace("ʅʅ", "ʅ").Replace("ʯʯ", "ʯ");
+                    string inzie = inqüin.Replace("ii", "i")
+                        .Replace("uu", "u").Replace("yy", "y")
+                        .Replace("ɨɨ", "ɨ")
+                        .Replace("ʉʉ", "ʉ")
+                        .Replace("ʅʅ", "ʅ")
+                        .Replace("ʯʯ", "ʯ")
+                        .Replace("iɨ", "i");//改眞侵重紐韻腹
                     wswrite.Cells.Rows[k][0].Value = inzie;
 
                 }
 
 
-                wkwrite.Save("d:\\d.xls");
+                wkwrite.Save("d:\\d2.xls");
 
             }
             catch (Exception e)
