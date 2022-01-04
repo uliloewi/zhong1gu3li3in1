@@ -55,14 +55,14 @@ namespace zhongguliin
                     {"模","o" },//皆一開
                     // 蟹攝
                     {"齊","ɛi" },//皆四等
-                    {"祭","ɛɿ" },//重紐皆三等
-                    {"泰","æɿ" },//皆一等
+                    {"祭","ɛʎ" },//重紐皆三等
+                    {"泰","aʎ" },//皆一等
                     {"佳","ɛ" },//皆二等 
                     {"皆","æi"},//皆二等
-                    {"夬","æɿ"},//皆二等
+                    {"夬","aʎ"},//皆二等
                     {"咍","ɒi" },//皆一開
                     {"灰","ɒi" },//皆一合
-                    {"廢","æɿ" },//皆三等
+                    {"廢","ɒʎ" },//皆三等
                     // 臻攝 
                     {"眞","ɨn" },{"眞入","ɨt" },//重紐皆三等，三A改i韻腹
                     {"臻","ən" },{"臻入","ət" },//皆三開
@@ -117,8 +117,18 @@ namespace zhongguliin
                     {"添","ɛm" },{"添入","ɛp" },//皆四開
                 };
 
+                Dictionary<char, string> inbiao2pinin = new Dictionary<char, string>()
+                {
+                    {'ʰ',"h" },{'p',"p" },{'b',"b" },{'m',"m" },
+                    {'t',"t" },{'d',"d" },{'n',"n" },{'s',"s" },{'z',"z" },{'l',"l" },
+                    {'k',"k" },{'g',"g" },{'ŋ',"ng" },{'ʔ',"q" },{'x',"h" },{'ɣ',"x" },
+                    {'ʈ',"tc" },{'ɖ',"dc" },{'ɳ',"n" },{'ʂ',"sc" },{'ʐ',"zc" },
+                    {'c',"t" },{'ɟ',"d" },{'ç',"sj" },{'ʝ',"zj" },{'ʎ',"j" },{'ɲ',"nj" },
+                    {'u',"u" },{'ʅ',"r" },{'ʯ',"w" },{'ɨ',"y" },{'ʉ',"v" },{'i',"i" },{'y',"ü" },
+                    {'o',"o" },{'ɪ',"ï" },{'ə',"ë" },{'ɛ',"e" },{'a',"a" },{'æ',"ä" },{'ɒ',"ö" },
+                };
 
-                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\Downloads\1.xlsx");
+                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\Downloads\Guangyun_Langjin_pulish_Alphabetic.2.0.xlsx");
                 Worksheet ws = wk.Worksheets[0];
 
                 var dt = ws.Cells.ExportDataTable(0, 0, 4000, 9);
@@ -133,20 +143,27 @@ namespace zhongguliin
                     string shengmu = sheng[dt.Rows[k][2].ToString().Substring(0, 1)];
                     string üinshou = jäin[(dt.Rows[k][5].ToString().Contains("A") || dt.Rows[k][5].ToString().Contains("幽") || dt.Rows[k][5].ToString().Contains("清") ? "四" : dt.Rows[k][3].ToString().Substring(0, 1)) + dt.Rows[k][4].ToString().Substring(0, 1)];
                     string üinmu = dt.Rows[k][6].ToString().Contains("入") ? üin[dt.Rows[k][5].ToString().Substring(0, 1) + dt.Rows[k][6].ToString().Substring(0, 1)] : üin[dt.Rows[k][5].ToString().Substring(0, 1)];
-                    string shengdiao = diao[dt.Rows[k][6].ToString()];
-                    string inqüin = shengmu + üinshou + üinmu + shengdiao;
-                    string inzie = inqüin.Replace("ii", "i")
+                    string diaozhr = diao[dt.Rows[k][6].ToString()];
+                    string inqüin = shengmu + üinshou + üinmu;
+                    string inbiao = inqüin.Replace("ii", "i")
                         .Replace("uu", "u").Replace("yy", "y")
                         .Replace("ɨɨ", "ɨ")
                         .Replace("ʉʉ", "ʉ")
                         .Replace("ʅʅ", "ʅ")
                         .Replace("ʯʯ", "ʯ")
                         .Replace("iɨ", "i");//改眞侵重紐韻腹
-                    wswrite.Cells.Rows[k][0].Value = inzie;
+                    wswrite.Cells.Rows[k][0].Value = inbiao + diaozhr;
+                    string pinin = "";
+                    foreach (char c in inbiao)
+                        pinin += inbiao2pinin[c];
 
+                    Console.WriteLine(k);
+                    if (dt.Rows[k][6].ToString().Contains("上") || dt.Rows[k][6].ToString().Contains("去"))
+                    {
+                        BiaoShenDiao(ref pinin, dt.Rows[k][6].ToString());      
+                    }
+                    wswrite.Cells.Rows[k][1].Value = pinin;
                 }
-
-
                 wkwrite.Save("d:\\d2.xls");
 
             }
@@ -154,7 +171,31 @@ namespace zhongguliin
             {
                 Console.WriteLine(e.Message);
             }
-        }   
+        }
+        
+        private static void BiaoShenDiao(ref string pinin, string shendiao)//標聲調
+        {
+            string üinfu = "aeiouyäöëï";
+            int idx = 10;
+            foreach (char ch in üinfu)
+            {
+                int loc = pinin.IndexOf(ch);
+                if (loc > -1 && loc < idx)
+                    idx = loc;
+            }
+            if (idx + 1 < pinin.Length && üinfu.Contains(pinin.Substring(idx + 1, 1)))
+                idx++;
+            if (pinin.Contains('a')) idx = pinin.IndexOf('a');
+            else if (pinin.Contains('ä')) idx = pinin.IndexOf('ä');
+            else if (pinin.Contains('ö')) idx = pinin.IndexOf('ö');
+            else if (pinin.Contains('e')) idx = pinin.IndexOf('e');
+            else if (pinin.Contains('ë')) idx = pinin.IndexOf('ë');
+            else if (pinin.Contains('u')) idx = pinin.IndexOf('u');
+            string zhuüänin = pinin.Substring(idx, 1);
+            string sinzyfu = zhuüänin + (shendiao.Contains("上") ? "\u0301" : "\u0300");
+            sinzyfu.Normalize();
+            pinin = pinin.Replace(zhuüänin, sinzyfu);
+        }
 
     }
 }
