@@ -64,19 +64,19 @@ namespace zhongguliin
                     {"灰","ɒi" },//皆一合
                     {"廢","ɒʎ" },//皆三等
                     // 臻攝 
-                    {"眞","ɨn" },{"眞入","ɨt" },//重紐皆三等，三A改i韻腹
-                    {"臻","ən" },{"臻入","ət" },//皆三開
-                    {"欣","on" },{"欣入","ot" },//皆三開
-                    {"文","ən" },{"文入","ət" },//皆三合
+                    {"眞","ən" },{"眞入","ət" },//重紐皆三等，三A改i韻腹
+                    {"臻","ɨn" },{"臻入","ɨt" },//皆三開
+                    {"欣","ɨn" },{"欣入","ɨt" },//皆三開
+                    {"文","ʉn" },{"文入","ʉt" },//皆三合
                     {"痕","on" },{"痕入","ot" },//皆一開
                     {"魂","on" },{"魂入","ot" },//皆合開
-                    {"諄","ɨn" },{"諄入","ɨt" },//皆三合，即眞B合
+                    {"諄","ən" },{"諄入","ət" },//皆三合，即眞B合
                     // 山攝 
                     {"寒","an" },{"寒入","at" },//皆一開，除了䔾三開
                     {"桓","an" },{"桓入","at" },//皆一開
                     {"刪","an" },{"刪入","at" },//皆二等
                     {"山","æn" },{"山入","æt" },//皆二等
-                    {"元","ɒn" },{"元入","ɒt" },//皆三等
+                    {"元","on" },{"元入","ot" },//皆三等
                     {"仙","æn" },{"仙入","æt" },//重紐皆三等
                     {"先","ɛn" },{"先入","ɛt" },//皆四等
                     // 效攝 
@@ -124,11 +124,11 @@ namespace zhongguliin
                     {'k',"k" },{'g',"g" },{'ŋ',"ng" },{'ʔ',"q" },{'x',"h" },{'ɣ',"x" },
                     {'ʈ',"tc" },{'ɖ',"dc" },{'ɳ',"n" },{'ʂ',"sc" },{'ʐ',"zc" },
                     {'c',"t" },{'ɟ',"d" },{'ç',"sj" },{'ʝ',"zj" },{'ʎ',"j" },{'ɲ',"nj" },
-                    {'u',"u" },{'ʅ',"r" },{'ʯ',"w" },{'ɨ',"y" },{'ʉ',"v" },{'i',"i" },{'y',"ü" },
+                    {'u',"u" },{'ʅ',"r" },{'ʯ',"w" },{'ɨ',"y" },{'ʉ',"ü" },{'i',"i" },{'y',"v" },
                     {'o',"o" },{'ɪ',"ï" },{'ə',"ë" },{'ɛ',"e" },{'a',"a" },{'æ',"ä" },{'ɒ',"ö" },
                 };
 
-                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\Downloads\Guangyun_Langjin_pulish_Alphabetic.2.0.xlsx");
+                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\1.xlsx");
                 Worksheet ws = wk.Worksheets[0];
 
                 var dt = ws.Cells.ExportDataTable(0, 0, 4000, 9);
@@ -147,10 +147,8 @@ namespace zhongguliin
                     string inqüin = shengmu + üinshou + üinmu;
                     string inbiao = inqüin.Replace("ii", "i")
                         .Replace("uu", "u").Replace("yy", "y")
-                        .Replace("ɨɨ", "ɨ")
-                        .Replace("ʉʉ", "ʉ")
-                        .Replace("ʅʅ", "ʅ")
-                        .Replace("ʯʯ", "ʯ")
+                        .Replace("ɨɨ", "ɨ").Replace("ʉʉ", "ʉ")
+                        .Replace("ʅʅ", "ʅ").Replace("ʯʯ", "ʯ")
                         .Replace("iɨ", "i");//改眞侵重紐韻腹
                     wswrite.Cells.Rows[k][0].Value = inbiao + diaozhr;
                     string pinin = "";
@@ -175,7 +173,7 @@ namespace zhongguliin
         
         private static void BiaoShenDiao(ref string pinin, string shendiao)//標聲調
         {
-            string üinfu = "aeiouyäöëï";
+            string üinfu = "aeiouyäöüëï";
             int idx = 10;
             foreach (char ch in üinfu)
             {
