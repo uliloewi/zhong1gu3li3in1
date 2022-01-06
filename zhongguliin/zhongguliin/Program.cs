@@ -128,16 +128,20 @@ namespace zhongguliin
                     {'o',"o" },{'ɪ',"ï" },{'ə',"ë" },{'ɛ',"e" },{'a',"a" },{'æ',"ä" },{'ɒ',"ö" },
                 };
 
-                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\1.xlsx");
+                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\Downloads\Guangyun_Langjin_pulish_Alphabetic.2.0.xlsx");
                 Worksheet ws = wk.Worksheets[0];
 
-                var dt = ws.Cells.ExportDataTable(0, 0, 4000, 9);
+                var dt = ws.Cells.ExportDataTable(0, 0, 4000, 19);
 
                 Aspose.Cells.Workbook wkwrite = new Aspose.Cells.Workbook();
                 Worksheet wswrite = wkwrite.Worksheets[0];
-
+                List<String> ls = new List<string>();
                 for (int k = 0; k < dt.Rows.Count && dt.Rows[k][2].ToString() != ""; k++)
                 {
+                    if (!ls.Contains(dt.Rows[k][11].ToString()))
+                    {
+                        ls.Add(dt.Rows[k][11].ToString());
+                    }
                     if (dt.Rows[k][3].ToString().Contains("等"))
                         continue;
                     string shengmu = sheng[dt.Rows[k][2].ToString().Substring(0, 1)];
@@ -162,6 +166,7 @@ namespace zhongguliin
                     }
                     wswrite.Cells.Rows[k][1].Value = pinin;
                 }
+                Console.WriteLine(ls.Count);
                 wkwrite.Save("d:\\d2.xls");
 
             }
