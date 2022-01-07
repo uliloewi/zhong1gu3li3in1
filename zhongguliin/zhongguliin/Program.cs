@@ -64,13 +64,13 @@ namespace zhongguliin
                     {"灰","ɒi" },//皆一合
                     {"廢","ɒʎ" },//皆三等
                     // 臻攝 
-                    {"眞","ən" },{"眞入","ət" },//重紐皆三等，三A改i韻腹
+                    {"眞","ɨn" },{"眞入","ɨt" },//重紐皆三等，三A改i韻腹
                     {"臻","ɨn" },{"臻入","ɨt" },//皆三開
-                    {"欣","ɨn" },{"欣入","ɨt" },//皆三開
+                    {"欣","ən" },{"欣入","ət" },//皆三開
                     {"文","ʉn" },{"文入","ʉt" },//皆三合
                     {"痕","on" },{"痕入","ot" },//皆一開
                     {"魂","on" },{"魂入","ot" },//皆合開
-                    {"諄","ən" },{"諄入","ət" },//皆三合，即眞B合
+                    {"諄","ɨn" },{"諄入","ɨt" },//皆三合，即眞B合
                     // 山攝 
                     {"寒","an" },{"寒入","at" },//皆一開，除了䔾三開
                     {"桓","an" },{"桓入","at" },//皆一開
@@ -128,7 +128,7 @@ namespace zhongguliin
                     {'o',"o" },{'ɪ',"ï" },{'ə',"ë" },{'ɛ',"e" },{'a',"a" },{'æ',"ä" },{'ɒ',"ö" },
                 };
 
-                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\Downloads\Guangyun_Langjin_pulish_Alphabetic.2.0.xlsx");
+                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\\MyDocument\音韻學\Guangyun_Langjin_Zhonggu.1.0.xlsx");
                 Worksheet ws = wk.Worksheets[0];
 
                 var dt = ws.Cells.ExportDataTable(0, 0, 4000, 19);
@@ -138,33 +138,91 @@ namespace zhongguliin
                 List<String> ls = new List<string>();
                 for (int k = 0; k < dt.Rows.Count && dt.Rows[k][2].ToString() != ""; k++)
                 {
+                    if (dt.Rows[k][3].ToString().Contains("等"))
+                        continue;
+
                     if (!ls.Contains(dt.Rows[k][11].ToString()))
                     {
                         ls.Add(dt.Rows[k][11].ToString());
                     }
-                    if (dt.Rows[k][3].ToString().Contains("等"))
-                        continue;
+
+                    string change = "";
+                    string newval = "";
+                    if (dt.Rows[k][13].ToString().StartsWith("改"))
+                    {
+                        var val = dt.Rows[k][13].ToString().Split(" ");
+                        change = val[0].Substring(val[0].Length - 1, 1);
+                        switch (change)
+                        {
+                            case "口":
+                            case "母":
+                                newval = val[0].Substring(1, 1);
+                                break;
+                            case "韻":
+                                newval = val[0].Substring(1, val[0].Length - 2);
+
+                                break;
+                        }
+
+                    }
+
                     string shengmu = sheng[dt.Rows[k][2].ToString().Substring(0, 1)];
+                    string shengmu2 = change == "母" || newval.Contains("母") ? sheng[newval.Substring(0, 1)] : shengmu;
                     string üinshou = jäin[(dt.Rows[k][5].ToString().Contains("A") || dt.Rows[k][5].ToString().Contains("幽") || dt.Rows[k][5].ToString().Contains("清") ? "四" : dt.Rows[k][3].ToString().Substring(0, 1)) + dt.Rows[k][4].ToString().Substring(0, 1)];
+                    if (dt.Rows[k][5].ToString().Contains("諄"))
+                    {
+                        string iahou = "見溪群羣疑曉匣";
+                        if (iahou.Contains(dt.Rows[k][2].ToString()))
+                        {
+                            üinshou = jäin["四合"];
+                        }
+                    }
+
+                    string üinshou2 = üinshou;
+                    if (change == "口")
+                        üinshou2 = jäin[(dt.Rows[k][5].ToString().Contains("A") || dt.Rows[k][5].ToString().Contains("幽") || dt.Rows[k][5].ToString().Contains("清") ? "四" : dt.Rows[k][3].ToString().Substring(0, 1)) + newval];
+                    else if (newval.Contains("A") || newval.Contains("B") || newval.Contains("幽"))
+                        üinshou2 = jäin[(newval.Contains("A") || newval.Contains("幽") ? "四" : dt.Rows[k][3].ToString().Substring(0, 1)) + dt.Rows[k][4].ToString().Substring(0, 1)];
+                    else if (newval.Contains("等"))
+                        üinshou2 = jäin[newval.Substring(newval.IndexOf("等") - 1,1) + dt.Rows[k][4].ToString().Substring(0, 1)];
+
                     string üinmu = dt.Rows[k][6].ToString().Contains("入") ? üin[dt.Rows[k][5].ToString().Substring(0, 1) + dt.Rows[k][6].ToString().Substring(0, 1)] : üin[dt.Rows[k][5].ToString().Substring(0, 1)];
+                    string üinmu2 = üinmu;
+                    if (newval.Length > 0)
+                    { 
+                        string sinüin = newval.Contains("A") || newval.Contains("B") ? newval.Substring(newval.Length - 2, 1) : newval.Substring(newval.Length - 1, 1);
+                        üinmu2 = change == "韻" ? (dt.Rows[k][6].ToString().Contains("入") ? üin[sinüin + dt.Rows[k][6].ToString().Substring(0, 1)] : üin[sinüin]) : üinmu;
+                    }
                     string diaozhr = diao[dt.Rows[k][6].ToString()];
                     string inqüin = shengmu + üinshou + üinmu;
+                    string inqüin2 = shengmu2 + üinshou2 + üinmu2;
                     string inbiao = inqüin.Replace("ii", "i")
                         .Replace("uu", "u").Replace("yy", "y")
                         .Replace("ɨɨ", "ɨ").Replace("ʉʉ", "ʉ")
                         .Replace("ʅʅ", "ʅ").Replace("ʯʯ", "ʯ")
                         .Replace("iɨ", "i");//改眞侵重紐韻腹
+                    string inbiao2 = inqüin2.Replace("ii", "i")
+                        .Replace("uu", "u").Replace("yy", "y")
+                        .Replace("ɨɨ", "ɨ").Replace("ʉʉ", "ʉ")
+                        .Replace("ʅʅ", "ʅ").Replace("ʯʯ", "ʯ")
+                        .Replace("iɨ", "i");//改眞侵重紐韻腹
                     wswrite.Cells.Rows[k][0].Value = inbiao + diaozhr;
+                    wswrite.Cells.Rows[k][2].Value = inbiao2 + diaozhr;
                     string pinin = "";
+                    string pinin2 = "";
                     foreach (char c in inbiao)
                         pinin += inbiao2pinin[c];
+                    foreach (char c in inbiao2)
+                        pinin2 += inbiao2pinin[c];
 
                     Console.WriteLine(k);
                     if (dt.Rows[k][6].ToString().Contains("上") || dt.Rows[k][6].ToString().Contains("去"))
                     {
-                        BiaoShenDiao(ref pinin, dt.Rows[k][6].ToString());      
+                        BiaoShenDiao(ref pinin, dt.Rows[k][6].ToString());
+                        BiaoShenDiao(ref pinin2, dt.Rows[k][6].ToString());
                     }
                     wswrite.Cells.Rows[k][1].Value = pinin;
+                    wswrite.Cells.Rows[k][3].Value = pinin2;
                 }
                 Console.WriteLine(ls.Count);
                 wkwrite.Save("d:\\d2.xls");
