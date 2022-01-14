@@ -81,7 +81,7 @@ namespace zhongguliin
                             {"文","ʉn" },{"文入","ʉt" },//皆三合
                             {"痕","on" },{"痕入","ot" },//皆一開
                             {"魂","on" },{"魂入","ot" },//皆合開
-                            {"諄","ɨn" },{"諄入","ɨt" },//皆三合，即眞B合
+                            {"諄","ɨn" },{"諄入","ɨt" },//皆三合，三A改i韻腹
                             // 山攝 
                             {"寒","an" },{"寒入","at" },//皆一開，除了䔾三開
                             {"桓","an" },{"桓入","at" },//皆一開
@@ -176,15 +176,7 @@ namespace zhongguliin
                             string shengmu = sheng[dt.Rows[k][2].ToString().Substring(0, 1)];
                             string shengmu2 = change == "母" || newval.Contains("母") ? sheng[newval.Substring(0, 1)] : shengmu;
                             string üinshou = jäin[(dt.Rows[k][5].ToString().Contains("A") || dt.Rows[k][5].ToString().Contains("幽") || dt.Rows[k][5].ToString().Contains("清") ? "四" : dt.Rows[k][3].ToString().Substring(0, 1)) + dt.Rows[k][4].ToString().Substring(0, 1)];
-                            if (dt.Rows[k][5].ToString().Contains("諄"))
-                            {
-                                string iahou = "見溪群羣疑曉匣";
-                                if (iahou.Contains(dt.Rows[k][2].ToString()))
-                                {
-                                    üinshou = jäin["四合"];
-                                }
-                            }
-
+                            
                             string üinshou2 = üinshou;
                             if (change != "聲" )
                             { 
@@ -211,12 +203,14 @@ namespace zhongguliin
                                 .Replace("uu", "u").Replace("yy", "y")
                                 .Replace("ɨɨ", "ɨ").Replace("ʉʉ", "ʉ")
                                 .Replace("ʅʅ", "ʅ").Replace("ʯʯ", "ʯ")
-                                .Replace("iɨ", "i");//改眞侵重紐韻腹
+                                .Replace("iɨ", "i")//改眞諄侵重四開韻腹
+                                .Replace("yɨ", "yi");//改眞諄侵重四合韻腹
                             string inbiao2 = inqüin2.Replace("ii", "i")
                                 .Replace("uu", "u").Replace("yy", "y")
                                 .Replace("ɨɨ", "ɨ").Replace("ʉʉ", "ʉ")
                                 .Replace("ʅʅ", "ʅ").Replace("ʯʯ", "ʯ")
-                                .Replace("iɨ", "i");//改眞侵重紐韻腹
+                                .Replace("iɨ", "i")//改眞諄侵重四開韻腹
+                                .Replace("yɨ", "yi");//改眞諄侵重四合韻腹
                             wswrite.Cells.Rows[k][0].Value = inbiao + diaozhr;
                             wswrite.Cells.Rows[k][2].Value = inbiao2 + diaozhr2;
                             string pinin = "";
