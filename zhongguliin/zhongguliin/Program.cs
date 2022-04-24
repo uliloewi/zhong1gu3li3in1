@@ -361,6 +361,19 @@ namespace zhongguliin
             pinin = pinin.Replace(zhuüänin, sinzyfu);
         }
 
+        private static List<string> ChangeStringList(List<string> dict, string ch, string du5in1)
+        {
+            List<string> res = new List<string>(dict);
+            if (!res.Any(x => x.StartsWith(ch)))
+                res.Add(ch + "," + du5in1);
+            else
+            {
+                string s = res.Where(x => x.StartsWith(ch)).First() + "," + du5in1;
+                res.RemoveAll(x => x.StartsWith(ch));
+                res.Add(s);
+            }
+            return res;
+        }
     }
 }
 
