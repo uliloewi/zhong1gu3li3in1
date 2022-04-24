@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace zhongguliin
@@ -13,7 +14,7 @@ namespace zhongguliin
             try
             {
                 Console.TreatControlCAsInput = true;
-                Console.WriteLine("生成擬音請按'1'；生成字表請按'2':");
+                Console.WriteLine("生成擬音請按'1'；生成字表請按'2'；生成多音字統計請按'3':");
                 ConsoleKeyInfo cki = Console.ReadKey();
                 var str = cki.Key.ToString();
                 Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\\Guangyun_Langjin_Zhonggu.1.0.xlsx");
@@ -243,7 +244,6 @@ namespace zhongguliin
                         wkwrite.Save("d:\\d2.xls");
                         break;
                     case "2":
-
                         List<string> lineList = new List<string>();
                         for (int k = 0; k < dt.Rows.Count && dt.Rows[k][2].ToString() != ""; k++)
                         {
@@ -274,6 +274,57 @@ namespace zhongguliin
                             }
                         }
                         File.WriteAllLines("d:\\tongguang.yaml", lineList) ;
+                        break;
+                    case "3":
+                        List<string> dict = new List<string>();
+                        for (int k = 0; k < dt.Rows.Count && dt.Rows[k][2].ToString() != ""; k++)
+                        {
+                            if (dt.Rows[k][3].ToString().Contains("等"))
+                                continue;
+                            int checkSurrogate = 1;
+                            char firstSurrogate = ' ';
+                            foreach (char ch in dt.Rows[k][12].ToString())
+                            {
+                                
+                                string pinin = dt.Rows[k][10].ToString();
+                                if (ch == '(' || ch == ')'|| ch == '+' || ch == '*')
+                                {
+                                    continue;
+                                }
+                                if (char.IsHighSurrogate(ch) && checkSurrogate == 1)
+                                {//複雜字的前半個
+                                    firstSurrogate = ch;
+                                    checkSurrogate++;
+                                }
+                                else if (checkSurrogate == 2)
+                                {//複雜字的後半個
+                                    string complexChar = String.Concat(firstSurrogate, ch);
+                                    if (!dict.Any(x => x.StartsWith(complexChar)))
+                                        dict.Add(complexChar + "," + dt.Rows[k][10].ToString());
+                                    else
+                                    {
+                                        string s = dict.Where(x => x.StartsWith(complexChar)).First() + "," + dt.Rows[k][10].ToString();
+                                        dict.RemoveAll(x => x.StartsWith(complexChar));
+                                        dict.Add(s);
+                                    }
+                                    checkSurrogate = 1;
+                                }
+                                else
+                                {
+                                    if (!dict.Any(x => x.StartsWith(ch)))
+                                        dict.Add(ch + "," + dt.Rows[k][10].ToString());
+                                    else
+                                    {
+                                        string s = dict.Where(x => x.StartsWith(ch)).First() + "," + dt.Rows[k][10].ToString();
+                                        dict.RemoveAll(x => x.StartsWith(ch));
+                                        dict.Add(s);
+                                    }
+                                }
+                            }
+                        }
+                        dict.RemoveAll(x => x.Count(f => f == ',') == 1);
+                        File.WriteAllLines("d:\\do1in1zy4.csv", dict.OrderBy(x => x.Count(f => f == ',')));
+
                         break;
                     default:
                         break;
