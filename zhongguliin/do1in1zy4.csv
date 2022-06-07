@@ -1068,7 +1068,7 @@
 拮,kiet,kit,,,,,,
 激,kièu,kiek,,,,,,
 轚,kièi,kiek,,,,,,
-𤭏,gyäk,tchiäk,,,,,,瓻？
+𤭏,gyäk,tchiäk,,,,,,rk
 𢜭,gyäk,kyäk,,,,,,
 釿,ngýn,kyën,,,,,,
 憼,kyáng,kyä́ng,,,,,,
@@ -1082,7 +1082,7 @@
 涇,kieng,giä́ng,,,,,,
 噤,gým,gỳm,,,,,,
 凚,gým,gỳm,,,,,,
-笒,dzcym,gỳm,,,,,,sk？
+笒,dzcym,gỳm,,,,,,rg
 禁,kym,kỳm,,,,,,
 僸,ngým,kỳm,,,,,,
 𧾵,küak,güak,,,,,,
@@ -1354,7 +1354,7 @@
 薕,liäm,liem,,,,,,
 䬯,nyäm,niem,,,,,,
 臉,tshiäm,lrä́m,,,,,,skl
-醶,tschrám,lrä́m,,,,,,r̥？
+醶,tschrám,lrä́m,,,,,,skr
 跈,dién,nién,,,,,,
 蓮,lien,liä́n,,,,,,
 斂,liä́m,liä̀m,,,,,,
@@ -1398,7 +1398,7 @@
 怜,lien,lieng,,,,,,
 獜,lin,lieng,,,,,,
 𣍆,tsjhy,nieng,,,,,,sn-？告假訓“寧”？
-暬 ,siät,niep,,,,,,“𣊓”之誤？sn？
+暬 ,siät,niep,,,,,,“𣊓”之誤
 𨛲,nien,nieng,,,,,,
 阾,lieng,liä́ng,,,,,,
 柃,lieng,liä́ng,,,,,,
@@ -1982,7 +1982,7 @@
 黔,gyäm,gym,,,,,,
 雂,gyäm,gym,,,,,,
 黚,gyäm,gym,,,,,,
-䅾,dzcym,gym,,,,,,sk？
+䅾,dzcym,gym,,,,,,rg
 䲔,gyang,gyäng,,,,,,
 檠,gyä̀ng,gyäng,,,,,,
 䫆,dzjiäng,gyäng,,,,,,
@@ -2155,7 +2155,7 @@
 㱡,scyng,scýng,,,,,,
 生,scräng,scrä̀ng,,,,,,
 鼪,scräng,scrä̀ng,,,,,,
-嗄,qràj,scrà,,,,,,“沙啞”之“沙”本字，口下會意？
+嗄,qràj,scrà,,,,,,“沙啞”之“沙”本字，rg
 沙,scra,scrà,,,,,,
 霎,scyäp,scräp,,,,,,
 歃,scyäp,scräp,,,,,,
@@ -2382,7 +2382,7 @@
 欶,scrök,sù,,,,,,
 漱,scyù,sù,,,,,,
 螋,scyu,scüo,,,,,,
-𥿇,scyo,khyó,,,,,,訓“紶”或形誤？所舉切非丘舉切？
+𥿇,scyo,khyó,,,,,,rk? 訓“紶”或形誤？所舉切非丘舉切？
 齭,tschyó,scyó,,,,,,
 籔,sú,scüó,,,,,,
 疏,scyo,scyò,,,,,,
@@ -2480,11 +2480,11 @@
 羠,ji,zí,,,,,,
 洍,jy,zý,,,,,,
 攺,jý,zý,,,,,,
-俟,gyëi,zcý,,,,,,？
-騃,ngrä́i,zcý,,,,,,？
+俟,gyëi,zcý,,,,,,rg
+騃,ngrä́i,zcý,,,,,,rng
 蔱,scrät,scyèj,,,,,,
 𡩡,screk,scyäk,,,,,,
-䂹,scyäk,kyí,,,,,,所夜切誤作居履切？
+䂹,scyäk,kyí,,,,,,rk
 䓠,tap,thöp,,,,,,
 濕,sjip,thöp,,,,,,
 䶀,khap,thöp,,,,,,
@@ -2910,7 +2910,7 @@
 熨,qüë̀i,qüët,,,,,,
 蔚,qüë̀i,qüët,,,,,,
 䬑,üë̀i,üët,,,,,,
-觱,pit,üët,,,,,,？
+觱,pit,üët,,,,,,一從古誖一從戉
 抭,jiä́u,üët,,,,,,一同“抌”一同“㧒”
 崛,güët,ngüët,,,,,,
 蜮,xuëk,üyk,,,,,,
@@ -3004,8 +3004,8 @@
 降,krö̀ng,xröng,,,,,,
 缸,kang,xröng,,,,,,
 傋,krö́ng,hrö́ng,,,,,,
-向,sjyàng,hyàng,,,,,,ŋ̊？
-珦,sjyàng,hyàng,,,,,,ŋ̊？
+向,sjyàng,hyàng,,,,,,
+珦,sjyàng,hyàng,,,,,,
 蠁,hyáng,hyàng,,,,,,
 嚮,hyáng,hyàng,,,,,,
 閧,xùng,xrö̀ng,,,,,,
@@ -3073,7 +3073,7 @@
 見,kièn,xièn,,,,,,
 𨘇,xuàj,xièn,,,,,,
 韅,hién,hièn,,,,,,
-獻,sö,hyòn,,,,,,ŋ̊？
+獻,sö,hyòn,,,,,,sŋ
 䦖,xrät,xiet,,,,,,
 頡,krät,xiet,,,,,,
 齕,xot,xiet,,,,,,
@@ -3597,13 +3597,13 @@
 湍,thuan,tsjvän,,,,,,
 鷒,duan,tsjvän,,,,,,
 叀,dzjvä̀n,tsjvän,,,,,,
-𡰝,gwän,tcüän,,,,,,下全切非丁全切？
+𡰝,gwän,tcüän,,,,,,下全切非丁全切？rg？
 剬,tuan,tsjvä́n,,,,,,
 鱄,tsjvän,tsjvä́n,,,,,,
 竱,tuan,tsjvä́n,,,,,,
 裝,tscyang,tscyàng,,,,,,
 䊋,tscyang,tscyàng,,,,,,
-戇,hùng,tcrö̀ng,,,,,,？
+戇,hùng,tcrö̀ng,,,,,,rh
 撞,dcröng,dcrö̀ng,,,,,,
 䡴,tsjhyong,dcrö̀ng,,,,,,
 憧,tsjhyong,dcrö̀ng,,,,,,
@@ -3626,7 +3626,7 @@
 綴,tcüät,tcüèj,,,,,,
 醊,tcüät,tcüèj,,,,,,
 畷,tcüät,tcüèj,,,,,,
-笍,njvèj,tcüèj,,,,,,？
+笍,njvèj,tcüèj,,,,,,rn？
 餟,tcüät,tcüèj,,,,,,
 錣,tcwat,tcüèj,,,,,,
 卂,sìn,tcüèj,,,,,,
@@ -3812,7 +3812,7 @@
 𢃒,tsuàj,tsuö̀i,,,,,,
 夎,tsuö̀,tsuö̀i,,,,,,
 𧑎,tshvèj,tsvèj,,,,,,
-㨹,svät,tsvèj,,,,,,于芮切非子芮切？sɣ？
+㨹,svät,tsvèj,,,,,,sɣ（于芮切非子芮切？）
 臶,dzièn,dzùon,,,,,,
 栫,dzièn,dzùon,,,,,,
 鱒,dzúon,dzùon,,,,,,
@@ -4091,7 +4091,7 @@
 磭,tsjhyak,ngýn,ngyak,,,,,？ 配“屵”
 熮,lieu,liä̀u,lyú,,,,,
 臡,niei,njiei,nö,,,,,
-蠡,liï,liéi,luö,,,,,？
+蠡,liï,liéi,luö,,,,,
 䎠,xuan,njy,nuö,,,,,一從丸二從而
 袲,tsjhiḯ,jiï,nö́,,,,,訓“娜”
 那,nö,nö́,nö̀,,,,,
@@ -4492,7 +4492,7 @@
 䣿,qüo,üo,hüo,,,,,
 虖,ho,xo,hüo,,,,,
 畜,hyuk,tchyù,tchyuk,,,,,一茲田會意二從由聲
-荲,hyuk,tchyk,tchyuk,,,,,？
+荲,hyuk,tchyk,tchyuk,,,,,rk
 𪑝,qyuk,üyk,hüyk,,,,,
 貆,huan,xuan,hüon,,,,,
 嬛,gväng,qvän,hvän,,,,,
@@ -4680,7 +4680,7 @@
 茈,dzcre,dziï,tsiḯ,,,,,
 㧗,tsiéi,tsiḯ,tscyḯ,,,,,
 跐,tshiḯ,tsiḯ,tscyḯ,,,,,
-㧘,dzcre,gyï̀,dziï̀,,,,,sk？
+㧘,dzcre,gyï̀,dziï̀,,,,,srk
 胔,tshiï,dziï,dziï̀,,,,,
 柲,pyì,bit,pyt,biet,,,,
 併,bréng,piä́ng,piä̀ng,biéng,,,,
@@ -4697,7 +4697,7 @@
 淊,xö́m,qräm,jiä́m,qrä̀m,,,,
 怮,qieu,qyu,qiu,qiú,,,,
 㭘,köp,xöp,gyöp,gyäp,,,,
-笈,gyöp,gyäp,gyp,tschräp,,,,從扱省？
+笈,gyöp,gyäp,gyp,tschräp,,,,rg？從扱省？
 𧱝,küët,güët,küät,küë̀n,,,,
 靬,kyon,krän,khan,khàn,,,,
 熇,hak,huk,hok,khàu,,,,
@@ -4842,7 +4842,7 @@
 藇,syo,zyó,jyo,jyó,jyò,,,
 詑,dö́,jiï,thuö,dö,hiï,,,
 眴,njvin,sjvìn,svin,hvèn,xvèn,,,一訓“瞤”四sk
-嵁,ngöm,ngö́m,khöm,khräm,dzcrä́m,,,kt？
+嵁,ngöm,ngö́m,khöm,khräm,dzcrä́m,,,rng
 芍,tshyak,tiek,dzjyak,tcyak,xiéu,,,丁了切非下了切？
 著,dcyo,tcyak,dcyak,tcyó,tcyò,,,
 啜,tsjhvät,dzjvèj,tcüät,dzjvät,tcüèj,,,
