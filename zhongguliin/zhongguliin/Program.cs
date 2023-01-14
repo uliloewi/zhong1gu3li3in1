@@ -14,7 +14,7 @@ namespace zhongguliin
             try
             {
                 Console.TreatControlCAsInput = true;
-                Console.WriteLine("生成擬音請按'1'；生成字表請按'2'；生成多音字統計請按'3':");
+                Console.WriteLine("生成擬音請按'1'；生成字表請按'2'；生成多音字統計請按'3'；改錄音名計請按'4':");
                 ConsoleKeyInfo cki = Console.ReadKey();
                 var str = cki.Key.ToString();
                 Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\\Guangyun_Langjin_Zhonggu.1.0.xlsx");
@@ -24,6 +24,7 @@ namespace zhongguliin
                 switch (str.Substring(str.Length - 1))
                 {
                     case "1":
+                        #region case 1
                         Dictionary<string, string> sheng = new Dictionary<string, string>()
                         {
                             {"幫","p" }, {"滂","pʰ" }, {"並","b" }, {"明","m" },
@@ -243,7 +244,10 @@ namespace zhongguliin
                         Console.WriteLine(ls.Count);
                         wkwrite.Save("d:\\d2.xls");
                         break;
+
+                    #endregion
                     case "2":
+                        #region case 2
                         List<string> lineList = new List<string>();
                         for (int k = 0; k < dt.Rows.Count && dt.Rows[k][2].ToString() != ""; k++)
                         {
@@ -275,7 +279,9 @@ namespace zhongguliin
                         }
                         File.WriteAllLines("d:\\tongguang.yaml", lineList) ;
                         break;
+                    #endregion
                     case "3":
+                        #region case 3
                         List<string> dict = new List<string>();
                         for (int k = 0; k < dt.Rows.Count && dt.Rows[k][2].ToString() != ""; k++)
                         {
@@ -326,6 +332,30 @@ namespace zhongguliin
                         File.WriteAllLines("d:\\do1in1zy4.csv", dict.OrderBy(x => x.Count(f => f == ',')));
 
                         break;
+                    #endregion
+                    case "4":
+                        #region case 4
+                        wk = new Aspose.Cells.Workbook(@"D:\soun\recorders.xlsx");
+                        ws = wk.Worksheets[0];
+                        dt = ws.Cells.ExportDataTable(0, 0, 4000, 19);
+                        for (int i=1;i<=3846;i++)
+                        {
+                            string sourceFile = "D:\\sound\\录音 ("+i.ToString()+").m4a";
+                            // Create a FileInfo  
+                            System.IO.FileInfo fi = new System.IO.FileInfo(sourceFile);
+                            // Check if file is there  
+                            if (fi.Exists)
+                            {
+                                fi.MoveTo("D:\\sound\\" + dt.Rows[i-1][1].ToString() + ".m4a");
+                                Console.WriteLine("The File " + i + " Renamed.");
+                            }
+                            else
+                                Console.WriteLine("The File " + i + " not found.");
+                        }
+
+
+                        break;
+                    #endregion
                     default:
                         break;
                 }
