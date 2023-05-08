@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System;
 
 namespace zhongguliin
 {
@@ -33,6 +34,11 @@ namespace zhongguliin
                     //ErDaoSang(dt, k, ws)
                     //Iou2BiO( denhuvin,  dt,  k, ws);
                     /*
+                    if (dt.Rows[k][3].ToString().Trim() == "影")
+                    {
+                        ws.Cells["C" + (k + 1).ToString()].Value = dt.Rows[k][2].ToString().Trim().Replace("h", "ʔ");
+                        ws.Cells["B" + (k + 1).ToString()].Value = dt.Rows[k][1].ToString().Trim().Replace("h", "ʔ");
+                    }
                     if (denhuvin == "三合文")
                     {
                         ws.Cells["C" + (k + 1).ToString()].Value = dt.Rows[k][2].ToString().Trim().Replace("ʷə", "o");
@@ -131,7 +137,7 @@ namespace zhongguliin
                     */
                     k++;
                 }
-                //wb.Save(@"C:\\Users\yli\OneDrive - Senacor Technologies AG\Dokumente\shangguliin.xlsx");
+                //wb.Save(@"C:\\Users\yli\OneDrive - Senacor Technologies AG\Dokumente\shangguliin3.xlsx");
                 wb.Save(@"D:\\shangguliin3.xlsx");
             }
             catch (Exception e)
