@@ -14,7 +14,6 @@ namespace zhongguliin
         {
             List<string> zinzu = new List<string>() { "精", "清", "從", "心", "邪" };
             List<string> jaenzu = new List<string>() { "見", "溪", "羣", "疑", "群", "曉", "匣", "影" };
-
             try
             {
                 Console.TreatControlCAsInput = true;
@@ -24,7 +23,7 @@ namespace zhongguliin
                 //Workbook wb = new Workbook(@"D:\\shangguliin.xlsx");
                 Worksheet ws = wb.Worksheets[0];
                 var dt = ws.Cells.ExportDataTable(0, 0, 10000, 19);
-                int border = ;
+                int border = 1;
 
                 for (int k = border; !string.IsNullOrEmpty(dt.Rows[k][3].ToString()) || !string.IsNullOrEmpty(dt.Rows[k][9].ToString()); k++)
                 {
