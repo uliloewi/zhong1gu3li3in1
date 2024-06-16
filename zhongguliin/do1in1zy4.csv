@@ -2837,7 +2837,7 @@
 槥,zvèj,üèj,,,,,,
 殟,quot,quon,,,,,,
 㑮,xuon,nguon,,,,,,
-梱,khúon,nguon,,,,,,
+梱,nguon,khúon,,,,,,訓“閫”
 閩,myn,müën,,,,,,
 伆,müët,müë́n,,,,,,
 勽,bàu,müë́n,,,,,,
@@ -4243,7 +4243,7 @@
 瘽,gyë́n,gỳn,gyën,,,,,
 蘄,kyëi,gy,gyën,,,,,
 殑,gỳng,gýng,gyng,,,,,
-顉,ngö́m,khym,khým,,,,,
+顉,ngö́m,khym,khým,,,,,造字撞形
 𪊑,kien,khien,khièng,,,,,
 𧼒,gin,khín,khỳn,,,,,
 𥳎,khyong,khyung,gyong,,,,,
@@ -4405,7 +4405,7 @@
 䧦,hüï,üï,üḯ,,,,,
 䲊,duö́,thuö́,jví,,,,,
 嵔,qüëi,qüë́i,quö́i,,,,,
-䫥,khuö́i,khy,nguö́i,,,,,
+䫥,khy,khuö́i,nguö́i,,,,,一訓“魌”或“魌”之誤，後二造字撞形
 遺,jy,jvi,jvì,,,,,
 蜼,jyù,lví,jvì,,,,,
 彗,zvì,zvèj,üèj,,,,,sk
@@ -4714,7 +4714,7 @@
 誺,tchyï,tchyì,tchỳ,lö̀i,,,,tr？
 礐,xuk,xok,khrök,lrek,,,,
 能,nöi,nö̀i,nëng,në́ng,,,,-ʔ與-ŋ音近
-儗,ngö̀i,hö̀i,ngỳ,ngý,,,,
+儗,ngö̀i,ngỳ,ngý,hö̀i,,,,誤把反切下字咍當作上字？
 㺜,nrau,nau,nong,nyong,,,,
 雺,mung,mòng,myu,mù,,,,
 繆,miu,miù,myu,myuk,,,,上古*-l和*-lk
@@ -4848,7 +4848,7 @@
 藇,syo,zyó,jyo,jyó,jyò,,,
 詑,dö́,jiï,thuö,dö,hiï,,,
 眴,njvin,sjvìn,svin,hvèn,xvèn,,,一訓“瞤”四sk
-嵁,ngöm,ngö́m,khöm,khräm,dzcrä́m,,,rŋ
+嵁,ngöm,ngö́m,khöm,khräm,dzcrä́m,,,第三白讀“堪”半邊音，第四配巖二等疊韻，第五嵁絕誤作雙聲
 芍,tiek,xiéu,tshyak,dzjyak,tcyak,,,一同“菂”一同“𦯪”且丁了切非下了切
 著,dcyo,tcyak,dcyak,tcyó,tcyò,,,
 啜,tsjhvät,dzjvèj,tcüät,dzjvät,tcüèj,,,
@@ -4913,3 +4913,4 @@
 𩔴,hyok,,,,,,,訓“頊”？盧玉切非虚玉切？
 𩪉,hyok,,,,,,,“𩩮”之誤且訓“頊”？盧玉切非虚玉切？
 𨸜,höi,,,,,,,“㱼”之誤
+䴰,zjyok,,,,,,,“䴬”之誤 
