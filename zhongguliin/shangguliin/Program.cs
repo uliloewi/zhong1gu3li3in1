@@ -18,17 +18,17 @@ namespace zhongguliin
             {
                 Console.TreatControlCAsInput = true;
 
-                Workbook wb = new Workbook(@"C:\\Users\yli\OneDrive - Senacor Technologies AG\Dokumente\shangguliin.xlsx");
+                Workbook wb = new Workbook(@"D:\MyDocument\test1.xlsx");
 
-                //Workbook wb = new Workbook(@"D:\\shangguliin.xlsx");
+                //Workbook wb = new Workbook(@"D:\\shangguliin.xlsx");從韻部到字
                 Worksheet ws = wb.Worksheets[0];
                 var dt = ws.Cells.ExportDataTable(0, 0, 10000, 19);
-                int border = 1;
+                int border=9540; //最後一個已考行數
 
                 for (int k = border; !string.IsNullOrEmpty(dt.Rows[k][3].ToString()) || !string.IsNullOrEmpty(dt.Rows[k][9].ToString()); k++)
                 {
                     int i = 0;
-                    for (i = 0; (dt.Rows[i][8].ToString() != dt.Rows[k][8].ToString() || ws.Cells["C" + (i + 1).ToString()].Value ==null) && i <= border ; i++)
+                    for (i = 0; (dt.Rows[i][8].ToString() != dt.Rows[k][8].ToString() || ws.Cells["C" + (i + 1).ToString()].Value == null) && i <= border ; i++)
                     {
                     }
                     if (i<border)
@@ -163,7 +163,7 @@ namespace zhongguliin
                                     *
                                     k++;
                                 }*/
-                wb.Save(@"C:\\Users\yli\OneDrive - Senacor Technologies AG\Dokumente\shangguliin3.xlsx");
+                wb.Save(@"D:\MyDocument\shangguliin3.xlsx");
                 //wb.Save(@"D:\\shangguliin3.xlsx");
             }
             catch (Exception e)
