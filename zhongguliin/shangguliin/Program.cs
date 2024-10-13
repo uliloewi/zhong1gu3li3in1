@@ -19,8 +19,7 @@ namespace zhongguliin
             //List<string> jaenzu = new List<string>() { "見", "溪", "羣", "疑", "群", "曉", "匣", "影" };
             try
             {
-
-                Fen1kä1ho5bin4gä5();
+                cä5gä5();
                 //Console.TreatControlCAsInput = true;
 
                 //Workbook wb = new Workbook(@"D:\MyDocument\test1.xlsx");
@@ -299,17 +298,23 @@ namespace zhongguliin
 
         private static void SetColor(Worksheet worksheet, string coord, Color c)
         {
-            Style style = new Style();//worksheet.Cells[coord].GetStyle();
+            Style style = new Style();
             style.Font.Color=c;
             worksheet.Cells[coord].SetStyle(style);
+        }
 
-
-            // Set Gradient pattern on
-            //style.IsGradient = true;
-            // Specify two color gradient fill effects
-            //style.SetTwoColorGradient(Color.FromArgb(255, 255, 255), Color.FromArgb(79, 129, 189), GradientStyleType.Horizontal, 1);
-            // Set the color of the text in the cell
-            //style.Font.Color = c;
+        private static void cä5gä5()
+        {
+            Workbook wb = new Workbook(@"D:\1.xlsx");//上古表
+            Worksheet ws = wb.Worksheets[0];
+            for (int k = 0; k < 9730; k++)
+            {
+                if (ws.Cells["A" + (k + 1).ToString()].IsMerged)
+                {                   
+                    ws.Cells.UnMerge(k, 0, 2, 1);
+                }
+            }
+            wb.Save(@"D:\shangguliin.xlsx");
         }
     }
 }
