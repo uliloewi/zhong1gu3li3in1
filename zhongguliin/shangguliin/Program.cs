@@ -318,18 +318,92 @@ namespace zhongguliin
         }
 
         private static void gä3shen1diao4()
-        {//如果表中I列是上、去聲，而D列沒ɣ、h尾，說明上古音有誤，要改。
+        {   //如果表中I列是上、去聲，而D列沒ɣ、h尾，說明上古音有誤，要改。
+            
             Workbook wb = new Workbook(@"D:\shang4gu3li3in1.xlsx");//上古表
             Worksheet ws = wb.Worksheets[0];
             for (int k = 0; k < 9919; k++)
             {
-                if (ws.Cells["I" + (k + 1).ToString()].Value.ToString()=="上" && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("ɣ") )
+                if (ws.Cells["D" + (k + 1).ToString()].Value != null)
                 {
-                    ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString() + "ɣ";
-                }
-                else if (ws.Cells["I" + (k + 1).ToString()].Value.ToString() == "去" && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("h"))
-                {
-                    ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString() + "h";
+                    if (ws.Cells["I" + (k + 1).ToString()].Value.ToString() == "上" && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("ɣ"))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString() + "ɣ";
+                    }
+                    else if (ws.Cells["I" + (k + 1).ToString()].Value.ToString() == "去" && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("h"))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString() + "h";
+                    }
+                    else if (ws.Cells["I" + (k + 1).ToString()].Value.ToString() == "平" && 
+                        (ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("h") || ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("ɣ")))
+                    {
+                        string guin = ws.Cells["D" + (k + 1).ToString()].Value.ToString();
+                        ws.Cells["D" + (k + 1).ToString()].Value = guin.Substring(0, guin.Length-1) ;
+                    }
+                    if (ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "三")
+                    {//如果表中F列是三等，而D列有ˤ，說明上古音有誤，要改。
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ˤ", "");
+                    }
+                    else if (!ws.Cells["D" + (k + 1).ToString()].Value.ToString().Contains("ˤ"))
+                    {//如果表中F列是丰等，而D列無ˤ，說明上古音有誤，要改。
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("a", "ˤa").Replace("ɔ", "ˤɔ").Replace("o", "ˤo").Replace("ə", "ˤə").Replace("e", "ˤe").Replace("ɛ", "ˤɛ");
+                    }
+
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "咸")
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("am", "əm");
+                    }
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "嚴")
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("am", "om");
+                    }
+                    //if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "脂A" && ws.Cells["E" + (k + 1).ToString()].Value.ToString() == "曉")
+                    if ("脂A質A".Contains(ws.Cells["H" + (k + 1).ToString()].Value.ToString()))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ə", "e");
+                    }
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "尤" || ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "冬")
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ɔ", "o");
+                    }
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "質A")
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ɔ", "et");
+                    }
+                    if ("肴麻".Contains(ws.Cells["H" + (k + 1).ToString()].Value.ToString()) && ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "二"  && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().Contains("r"))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ˤ", "rˤ");
+                    }
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString()== "麥" && ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "二" &&
+                        "見群溪疑曉匣".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ɛ", "ə");
+                    }
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "真A" &&
+                        "見群溪疑曉匣".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("on", "ʷen");
+                    }
+                    if ("文物".Contains(ws.Cells["H" + (k + 1).ToString()].Value.ToString()) &&
+                        "見群溪疑曉匣".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ʷə", "o");
+                    }
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "物" &&
+                        "幫滂並明".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("o", "ə");
+                    }
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "魚" &&
+                       ws.Cells["E" + (k + 1).ToString()].Value.ToString() == "心")
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("xa", "xʷa").Replace("ŋa", "ŋʷa");
+                    }
+                   /* if ("溪滂透".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()) &&
+                        !ws.Cells["D" + (k + 1).ToString()].Value.ToString().Contains("ʰ"))
+                    {
+                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("k", "kʰ").Replace("p", "pʰ").Replace("t", "tʰ");
+                    }*/
                 }
             }
             wb.Save(@"D:\shangguliin.xlsx");
