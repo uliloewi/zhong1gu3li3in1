@@ -19,7 +19,7 @@ namespace zhongguliin
             //List<string> jaenzu = new List<string>() { "見", "溪", "羣", "疑", "群", "曉", "匣", "影" };
             try
             {
-                cä5gä5();
+                gä3shen1diao4();
                 //Console.TreatControlCAsInput = true;
 
                 //Workbook wb = new Workbook(@"D:\MyDocument\test1.xlsx");
@@ -312,6 +312,24 @@ namespace zhongguliin
                 if (ws.Cells["A" + (k + 1).ToString()].IsMerged)
                 {                   
                     ws.Cells.UnMerge(k, 0, 2, 1);
+                }
+            }
+            wb.Save(@"D:\shangguliin.xlsx");
+        }
+
+        private static void gä3shen1diao4()
+        {//如果表中I列是上、去聲，而D列沒ɣ、h尾，說明上古音有誤，要改。
+            Workbook wb = new Workbook(@"D:\shang4gu3li3in1.xlsx");//上古表
+            Worksheet ws = wb.Worksheets[0];
+            for (int k = 0; k < 9919; k++)
+            {
+                if (ws.Cells["I" + (k + 1).ToString()].Value.ToString()=="上" && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("ɣ") )
+                {
+                    ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString() + "ɣ";
+                }
+                else if (ws.Cells["I" + (k + 1).ToString()].Value.ToString() == "去" && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("h"))
+                {
+                    ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString() + "h";
                 }
             }
             wb.Save(@"D:\shangguliin.xlsx");
