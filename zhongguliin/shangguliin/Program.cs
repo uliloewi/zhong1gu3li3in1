@@ -19,7 +19,7 @@ namespace zhongguliin
             //List<string> jaenzu = new List<string>() { "見", "溪", "羣", "疑", "群", "曉", "匣", "影" };
             try
             {
-                gä3shen1diao4();
+                ja1guang3tong1();
                 //Console.TreatControlCAsInput = true;
 
                 //Workbook wb = new Workbook(@"D:\MyDocument\test1.xlsx");
@@ -407,6 +407,57 @@ namespace zhongguliin
                 }
             }
             wb.Save(@"D:\shangguliin.xlsx");
+        }
+        /// <summary>
+        /// 給 https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E5%BB%A3%E9%9F%BB.tsv 加廣通羅馬字
+        /// </summary>
+        private static void ja1guang3tong1()
+        {   
+            Workbook wb = new Workbook(@"D:\old.xlsx");//舊
+            Worksheet ws = wb.Worksheets[0];
+            Workbook wb2 = new Workbook(@"D:\Guangyun_Langjin_Zhonggu.1.0.xlsx");//舊
+            Worksheet ws2 = wb2.Worksheets[0];
+            for (int k = 2; k <= 25332; k++)
+            {
+                var fang3cie5 = ws.Cells["H" + k.ToString()].Value.ToString().Replace("式之(脂)", "式脂").Replace("叉⟨尺⟩隹", "尺隹").Replace("居帋", "居氏").Replace("都搕⟨榼⟩", "都榼")
+                    .Replace("徂累(壘)", "徂累").Replace("近⟨丘⟩倨", "丘倨").Replace("博故", "愽故").Replace("臧𧙓⟨祚⟩", "臧祚").Replace("之芮", "之銳").Replace("土⟨士⟩列", "士列")
+                    .Replace("陟離", "陟移").Replace("姊宜⦉規⦊", "姊規").Replace("子⦅?⦆⟨之⟩垂", "專垂").Replace("側宜", "側移").Replace("士宜", "士移").Replace("杜懷", "柱懷")
+                    .Replace("乙皆(乖)", "乙乖").Replace("諧⟨諾⟩皆", "諾皆").Replace("昌來⟨求⟩", "昌求").Replace("普才⦅來⦆⟨求⟩", "普求").Replace("側(職)鄰", "職鄰").Replace("府(撫)文", "撫文")
+                    .Replace("嘗芮", "甞芮").Replace("呼吠", "呼吠？").Replace("他⟨迍⟩怪", "迍怪").Replace("古賣(邁)", "古邁").Replace("五夾⦅洽⦆⟨冷⟩", "五剄")
+                    .Replace("力頑⟨規⟩", "力頑").Replace("崇⟨?⟩玄⟨?⟩", "崇玄").Replace("居乙⟨乞⟩", "居乞").Replace("都牢", "都勞").Replace("子𩨷", "子𩩆").Replace("縷𩨷", "縷𩨭")
+                    .Replace("千侯⟨隹⟩", "尺隹").Replace("子幽⟨絲⟩", "子之").Replace("山幽⟨函⟩", "蘇含").Replace("昨⟨作⟩三", "作三").Replace("符咸(䒦)", "符䒦")
+                    .Replace("呂張", "呂章").Replace("居理", "居里").Replace("初紀⦅己⦆⟨乙⟩", "初栗").Replace("美畢(筆)", "美筆").Replace("居竭(謁)", "居竭")
+                    .Replace("求⟨?⟩蟹", "求蟹").Replace("求⟨乖⟩蟹", "求蟹").Replace("而允⟨兗⟩", "而兖").Replace("許竭(謁)", "許竭").Replace("五骨⟨滑⟩", "五滑")
+                    .Replace("辝纂⦅短⦆⟨矩⟩", "似矩").Replace("被⟨披⟩免", "披免").Replace("烏晈", "烏皎").Replace("以沼⦅小⦆⟨水⟩", "以水")
+                    .Replace("作⦅子⦆⟨千⟩可", "千可").Replace("博下", "愽下").Replace("博蓋", "愽蓋").Replace("莫幸(杏)", "莫杏").Replace("呼⟨乎⟩䁝", "乎䁝")
+                    .Replace("苦蓋(愛)", "苦愛").Replace("方⟨芳⟩廢","芳廢").Replace("徐(疾)刃", "疾刃").Replace("芳⦅反⦆⟨叉⟩万", "初万").Replace("祖⟨徂⟩贊", "徂贊").Replace("姝⟨殊⟩雪", "殊雪")
+                    .Replace("式任⟨荏⟩", "式荏").Replace("魯⟨魚⟩掩⟨埯⟩", "魚埯").Replace("子⟨千⟩仲", "千仲").Replace("乙冀", "乙兾").Replace("扶涕⟨沸⟩", "扶沸")
+                    .Replace("博慢⟨漫⟩", "博漫").Replace("于⟨予⟩線", "予線").Replace("于⟨子⟩亮","子亮").Replace("許⦅火⦆令⟨含⟩", "火含").Replace("[徒]候", "徒候").Replace("丘謁(竭)", "丘竭")
+                    .Replace("音黯去聲", "乙鑒").Replace("音蒸上聲", "之庱").Replace("矛⟨予⟩割", "予割").Replace("簪⦅子⦆⟨于⟩摑", "胡麥").Replace("居列(?)", "居列").Replace("廁列⟨別⟩", "厠別")
+                #region 柳漫另有說法
+                    .Replace("於力(棘)", "於力").Replace("倉雜(臘)", "倉雜").Replace("七⟨火⟩役", "七役").Replace("之⦅志⦆⟨?⟩役", "之役").Replace("士⦅仕⦆⟨丘⟩㾕", "士㾕").Replace("香⦅許⦆幽(彪)", "香幽")
+                    .Replace("九輦(善)", "九輦").Replace("毗養⦅兩⦆⟨霄⟩", "毗養").Replace("士⟨于⟩忍", "七忍").Replace("丘之⟨乏⟩", "丘之").Replace("丑戾⟨居⟩", "丑戾").Replace("下珍⟨殄⟩", "下珍")
+                    .Replace("初紀⦅史⦆⟨夬⟩", "初紀").Replace("火⟨丈⟩弔⦅叫⦆⟨列⟩", "火弔").Replace("火弔⟨即⟩", "火弔").Replace("丈⟨?⟩夥⟨黠⟩", "丈夥").Replace("花⟨?⟩夥⟨黠⟩", "花夥")
+                    .Replace("職⦉且⦊勇", "職勇").Replace("丁全⟨兮⟩", "跪頑")
+                #endregion
+                    .Replace("士⟨七⟩", "七").Replace("七⟨士⟩", "士")
+                    .Replace("戶", "戸").Replace("真", "眞").Replace("菹", "葅").Replace("暨", "曁").Replace("顛", "顚").Replace("彥", "彦").Replace("鑒", "鑑")
+                    .Replace("既", "旣").Replace("溉", "漑").Replace("槩", "概").Replace("教", "敎").Replace("亙", "亘").Replace("劒", "劔").Replace("𧸖", "賺").Replace("祿", "禄")
+                    .Replace("顏", "顔").Replace("虛", "虚").Replace("㚷", "妳").Replace("囂", "嚻").Replace("乘", "乗").Replace("恆", "恒").Replace("摠", "揔").Replace("錄", "録")
+                    .Replace("毀", "毁").Replace("豨", "狶").Replace("疎", "踈").Replace("袞", "衮").Replace("眾", "衆").Replace("弊", "獘").Replace("內", "内").Replace("兗", "兖")
+                    .Replace("沒", "没").Replace("查", "査");
+                //.Replace("七溜⦅霤⦆⟨雷⟩", "七溜")
+                int i = 2;
+                while (ws2.Cells["I"+ i.ToString()].Value?.ToString() != fang3cie5 && i < 3887)
+                {
+                    i++;
+                }
+                if (i<=3887 && ws2.Cells["I" + i.ToString()].Value.ToString() == fang3cie5)
+                    ws.Cells["M" + k.ToString()].Value = ws2.Cells["K" + i.ToString()].Value.ToString();
+                else
+                    ws.Cells["M" + k.ToString()].Value += "Wrong!";
+            }
+            wb.Save(@"D:\new.xlsx");
         }
     }
 }
