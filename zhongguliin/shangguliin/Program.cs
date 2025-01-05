@@ -19,7 +19,7 @@ namespace zhongguliin
             //List<string> jaenzu = new List<string>() { "見", "溪", "羣", "疑", "群", "曉", "匣", "影" };
             try
             {
-                ja1guang3tong1();
+                gae3chen2guae5zi5in1biao1();
                 //Console.TreatControlCAsInput = true;
 
                 //Workbook wb = new Workbook(@"D:\MyDocument\test1.xlsx");
@@ -230,7 +230,7 @@ namespace zhongguliin
             Worksheet ws2 = wb2.Worksheets[0];
             var dt2 = ws2.Cells.ExportDataTable(0, 0, 3885, 9);
             for (int k = 0; k < 240; k++)
-            {                
+            {
                 var fan3cie5 = dt.Rows[k][5].ToString().Trim();
                 var sdhüd = dt.Rows[k][0].ToString().Trim() + dt.Rows[k][1].ToString().Trim() + dt.Rows[k][2].ToString().Trim() + dt.Rows[k][3].ToString().Trim() + dt.Rows[k][4].ToString().Trim();
                 int i = 0;
@@ -270,7 +270,7 @@ namespace zhongguliin
             Worksheet ws = wb.Worksheets[0];
             var dt = ws.Cells.ExportDataTable(0, 0, 9730, 1);
             int ii;
-            for (int k = 0;k<9730 ; k++)
+            for (int k = 0; k < 9730; k++)
             {
                 if (ws.Cells["A" + (k + 1).ToString()].IsMerged)
                 { /*
@@ -280,15 +280,15 @@ namespace zhongguliin
                     {
                         int i = 1;
                         SetColor(ws, "A" + (k + 1).ToString(), Color.Red);
-                        while (ws.Cells["A" + (k + 1 +i).ToString()].Value == null)
+                        while (ws.Cells["A" + (k + 1 + i).ToString()].Value == null)
                         {
                             ws.Cells["A" + (k + 1 + i).ToString()].Value = ws.Cells["A" + (k + 1).ToString()].Value.ToString().Trim();
-                            SetColor(ws, "A" + (k + 1 +i).ToString(), Color.Red);
+                            SetColor(ws, "A" + (k + 1 + i).ToString(), Color.Red);
                             i++;
                         }
                         ws.Cells.UnMerge(k, 0, i, 1);
 
-                        k += i-1;
+                        k += i - 1;
                     }
 
                 }
@@ -299,7 +299,7 @@ namespace zhongguliin
         private static void SetColor(Worksheet worksheet, string coord, Color c)
         {
             Style style = new Style();
-            style.Font.Color=c;
+            style.Font.Color = c;
             worksheet.Cells[coord].SetStyle(style);
         }
 
@@ -310,7 +310,7 @@ namespace zhongguliin
             for (int k = 0; k < 9730; k++)
             {
                 if (ws.Cells["A" + (k + 1).ToString()].IsMerged)
-                {                   
+                {
                     ws.Cells.UnMerge(k, 0, 2, 1);
                 }
             }
@@ -319,7 +319,7 @@ namespace zhongguliin
 
         private static void gä3shen1diao4()
         {   //如果表中I列是上、去聲，而D列沒ɣ、h尾，說明上古音有誤，要改。
-            
+
             Workbook wb = new Workbook(@"D:\shang4gu3li3in1.xlsx");//上古表
             Worksheet ws = wb.Worksheets[0];
             for (int k = 0; k < 9919; k++)
@@ -334,11 +334,11 @@ namespace zhongguliin
                     {
                         ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString() + "h";
                     }
-                    else if (ws.Cells["I" + (k + 1).ToString()].Value.ToString() == "平" && 
+                    else if (ws.Cells["I" + (k + 1).ToString()].Value.ToString() == "平" &&
                         (ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("h") || ws.Cells["D" + (k + 1).ToString()].Value.ToString().EndsWith("ɣ")))
                     {
                         string guin = ws.Cells["D" + (k + 1).ToString()].Value.ToString();
-                        ws.Cells["D" + (k + 1).ToString()].Value = guin.Substring(0, guin.Length-1) ;
+                        ws.Cells["D" + (k + 1).ToString()].Value = guin.Substring(0, guin.Length - 1);
                     }
                     if (ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "三")
                     {//如果表中F列是三等，而D列有ˤ，說明上古音有誤，要改。
@@ -370,11 +370,11 @@ namespace zhongguliin
                     {
                         ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ɔ", "et");
                     }
-                    if ("肴麻".Contains(ws.Cells["H" + (k + 1).ToString()].Value.ToString()) && ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "二"  && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().Contains("r"))
+                    if ("肴麻".Contains(ws.Cells["H" + (k + 1).ToString()].Value.ToString()) && ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "二" && !ws.Cells["D" + (k + 1).ToString()].Value.ToString().Contains("r"))
                     {
                         ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ˤ", "rˤ");
                     }
-                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString()== "麥" && ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "二" &&
+                    if (ws.Cells["H" + (k + 1).ToString()].Value.ToString() == "麥" && ws.Cells["F" + (k + 1).ToString()].Value.ToString() == "二" &&
                         "見群溪疑曉匣".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()))
                     {
                         ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("ɛ", "ə");
@@ -399,11 +399,11 @@ namespace zhongguliin
                     {
                         ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("xa", "xʷa").Replace("ŋa", "ŋʷa");
                     }
-                   /* if ("溪滂透".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()) &&
-                        !ws.Cells["D" + (k + 1).ToString()].Value.ToString().Contains("ʰ"))
-                    {
-                        ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("k", "kʰ").Replace("p", "pʰ").Replace("t", "tʰ");
-                    }*/
+                    /* if ("溪滂透".Contains(ws.Cells["E" + (k + 1).ToString()].Value.ToString()) &&
+                         !ws.Cells["D" + (k + 1).ToString()].Value.ToString().Contains("ʰ"))
+                     {
+                         ws.Cells["D" + (k + 1).ToString()].Value = ws.Cells["D" + (k + 1).ToString()].Value.ToString().Replace("k", "kʰ").Replace("p", "pʰ").Replace("t", "tʰ");
+                     }*/
                 }
             }
             wb.Save(@"D:\shangguliin.xlsx");
@@ -412,7 +412,7 @@ namespace zhongguliin
         /// 給 https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E5%BB%A3%E9%9F%BB.tsv 加廣通羅馬字
         /// </summary>
         private static void ja1guang3tong1()
-        {   
+        {
             Workbook wb = new Workbook(@"D:\old.xlsx");//舊
             Worksheet ws = wb.Worksheets[0];
             Workbook wb2 = new Workbook(@"D:\Guangyun_Langjin_Zhonggu.1.0.xlsx");//舊
@@ -430,9 +430,9 @@ namespace zhongguliin
                     .Replace("求⟨?⟩蟹", "求蟹").Replace("求⟨乖⟩蟹", "求蟹").Replace("而允⟨兗⟩", "而兖").Replace("許竭(謁)", "許竭").Replace("五骨⟨滑⟩", "五滑")
                     .Replace("辝纂⦅短⦆⟨矩⟩", "似矩").Replace("被⟨披⟩免", "披免").Replace("烏晈", "烏皎").Replace("以沼⦅小⦆⟨水⟩", "以水")
                     .Replace("作⦅子⦆⟨千⟩可", "千可").Replace("博下", "愽下").Replace("博蓋", "愽蓋").Replace("莫幸(杏)", "莫杏").Replace("呼⟨乎⟩䁝", "乎䁝")
-                    .Replace("苦蓋(愛)", "苦愛").Replace("方⟨芳⟩廢","芳廢").Replace("徐(疾)刃", "疾刃").Replace("芳⦅反⦆⟨叉⟩万", "初万").Replace("祖⟨徂⟩贊", "徂贊").Replace("姝⟨殊⟩雪", "殊雪")
+                    .Replace("苦蓋(愛)", "苦愛").Replace("方⟨芳⟩廢", "芳廢").Replace("徐(疾)刃", "疾刃").Replace("芳⦅反⦆⟨叉⟩万", "初万").Replace("祖⟨徂⟩贊", "徂贊").Replace("姝⟨殊⟩雪", "殊雪")
                     .Replace("式任⟨荏⟩", "式荏").Replace("魯⟨魚⟩掩⟨埯⟩", "魚埯").Replace("子⟨千⟩仲", "千仲").Replace("乙冀", "乙兾").Replace("扶涕⟨沸⟩", "扶沸")
-                    .Replace("博慢⟨漫⟩", "博漫").Replace("于⟨予⟩線", "予線").Replace("于⟨子⟩亮","子亮").Replace("許⦅火⦆令⟨含⟩", "火含").Replace("[徒]候", "徒候").Replace("丘謁(竭)", "丘竭")
+                    .Replace("博慢⟨漫⟩", "博漫").Replace("于⟨予⟩線", "予線").Replace("于⟨子⟩亮", "子亮").Replace("許⦅火⦆令⟨含⟩", "火含").Replace("[徒]候", "徒候").Replace("丘謁(竭)", "丘竭")
                     .Replace("音黯去聲", "乙鑒").Replace("音蒸上聲", "之庱").Replace("矛⟨予⟩割", "予割").Replace("簪⦅子⦆⟨于⟩摑", "胡麥").Replace("居列(?)", "居列").Replace("廁列⟨別⟩", "厠別")
                 #region 柳漫另有說法
                     .Replace("於力(棘)", "於力").Replace("倉雜(臘)", "倉雜").Replace("七⟨火⟩役", "七役").Replace("之⦅志⦆⟨?⟩役", "之役").Replace("士⦅仕⦆⟨丘⟩㾕", "士㾕").Replace("香⦅許⦆幽(彪)", "香幽")
@@ -448,16 +448,43 @@ namespace zhongguliin
                     .Replace("沒", "没").Replace("查", "査");
                 //.Replace("七溜⦅霤⦆⟨雷⟩", "七溜")
                 int i = 2;
-                while (ws2.Cells["I"+ i.ToString()].Value?.ToString() != fang3cie5 && i < 3887)
+                while (ws2.Cells["I" + i.ToString()].Value?.ToString() != fang3cie5 && i < 3887)
                 {
                     i++;
                 }
-                if (i<=3887 && ws2.Cells["I" + i.ToString()].Value.ToString() == fang3cie5)
+                if (i <= 3887 && ws2.Cells["I" + i.ToString()].Value.ToString() == fang3cie5)
                     ws.Cells["M" + k.ToString()].Value = ws2.Cells["K" + i.ToString()].Value.ToString();
                 else
                     ws.Cells["M" + k.ToString()].Value += "Wrong!";
             }
             wb.Save(@"D:\new.xlsx");
+        }
+
+        private static void gae3chen2guae5zi5in1biao1()
+        {
+            StreamReader sr = new StreamReader("D:\\aa.yml");
+            StreamWriter sw = new StreamWriter("D:\\南京字表.IPA.yml");
+            //Read the first line of text
+            var line = sr.ReadLine();
+            //Continue to read until you reach end of file
+            while (line != null)
+            {
+                //write the line to console window
+                var ipa=line.Replace("5", "ʔ‹7›").Replace("1", "‹1›").Replace("2", "‹2›").Replace("3", "‹3›").Replace("4", "‹5›")
+                    .Replace("zhr", "tʂʅ").Replace("chr", "tʂʰʅ").Replace("shr", "ʂʅ").Replace("rʔ‹7›", "ʐʅʔ‹7›")
+                    .Replace("ao", "ɔo").Replace("ou", "əɯ").Replace("er", "ɚ").Replace("en", "ən").Replace("ei", "əi").Replace("än", "en").Replace("äʔ", "ɜʔ")
+                    .Replace("ng", "ŋ").Replace("zh", "ʈʂ").Replace("ch", "tʂʰ").Replace("sh", "ʂ")
+                    .Replace("p", "pʰ").Replace("t", "tʰ").Replace("k", "kʰ").Replace("q", "tɕʰ").Replace("c", "tsʰ")
+                    .Replace("b", "p").Replace("d", "t").Replace("g", "k").Replace("j", "tɕ").Replace("z", "ts")                    
+                    .Replace("x", "ɕ").Replace("y", "ɿ").Replace("ü", "y").Replace("ä", "ae").Replace("r", "ʐ")
+                    .Replace("ʰʂʰ", "ʂʰ").Replace("ʰsʰ", "sʰ").Replace("ʰɕʰ", "ɕʰ");
+                sw.WriteLine(ipa);
+                //Read the next line
+                line = sr.ReadLine();
+            }
+            //close the file
+            sr.Close();
+            sw.Close();
         }
     }
 }
