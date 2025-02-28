@@ -19,7 +19,8 @@ namespace zhongguliin
             //List<string> jaenzu = new List<string>() { "見", "溪", "羣", "疑", "群", "曉", "匣", "影" };
             try
             {
-                gae3chen2guae5zi5in1biao1();
+                Hao2Siao1();
+                //gae3chen2guae5zi5in1biao1();
                 //Console.TreatControlCAsInput = true;
 
                 //Workbook wb = new Workbook(@"D:\MyDocument\test1.xlsx");
@@ -485,6 +486,61 @@ namespace zhongguliin
             //close the file
             sr.Close();
             sw.Close();
+        }
+
+        /*
+         * ˤø四開蕭；ʷˤø一開豪
+         * ˤo一開豪；ʷˤo四開蕭
+         */
+        private static void Hao2Siao1()
+        {
+            Workbook wb = new Workbook(@"D:\A.xlsx");//上古表
+            Worksheet ws = wb.Worksheets[0];
+            var dt = ws.Cells.ExportDataTable(0, 0, 9913, 1);
+            int ii;
+            for (int k = 2; k < 9913; k++)
+            {
+                string zhongguüinmu = ws.Cells["K" + (k + 1).ToString()].Value.ToString();//K列是中古韻母
+
+                if (ws.Cells["G" + (k + 1).ToString()].Value != null)
+                {
+                    string shangguin = ws.Cells["G" + (k + 1).ToString()].Value.ToString();//G列是上古擬音
+                    if (!shangguin.Contains("ˤok") && !shangguin.Contains("ˤoŋ") && !shangguin.Contains("ˤom") && !shangguin.Contains("ˤøk") && !shangguin.Contains("ˤøŋ")
+                        && !shangguin.Contains("ˤøl") && !shangguin.Contains("ˤøt") && !shangguin.Contains("ˤøn") && !shangguin.Contains("ˤøm") && !shangguin.Contains("ˤøp"))
+                    {
+                        if (zhongguüinmu == "豪")
+                        {
+                            if (shangguin.Contains("ˤo"))
+                            {
+                                if (shangguin.Contains("ʷˤo"))
+                                    ws.Cells["G" + (k + 1).ToString()].Value = shangguin.Replace("ʷˤo", "ˤo");
+                            }
+                            else if (shangguin.Contains("ˤø"))
+                            {
+                                if (!shangguin.Contains("ʷˤø") && !shangguin.StartsWith("b") && !shangguin.StartsWith("p") && !shangguin.StartsWith("m") && !shangguin.StartsWith("xm"))
+                                    ws.Cells["G" + (k + 1).ToString()].Value = shangguin.Replace("ˤø", "ʷˤø");
+                            }
+                        }
+                        else if (zhongguüinmu == "蕭")
+                        {
+                            if (shangguin.Contains("ˤo"))
+                            {
+                                if (!shangguin.Contains("ʷˤo") && !shangguin.StartsWith("b") && !shangguin.StartsWith("p") && !shangguin.StartsWith("m"))
+                                    ws.Cells["G" + (k + 1).ToString()].Value = shangguin.Replace("ˤo", "ʷˤo");
+                            }
+                            else if (shangguin.Contains("ˤø"))
+                            {
+                                if (shangguin.Contains("ʷˤø"))
+                                    ws.Cells["G" + (k + 1).ToString()].Value = shangguin.Replace("ʷˤø", "ˤø");
+                                else if ((shangguin.StartsWith("s") || shangguin.StartsWith("r") || shangguin.StartsWith("k") || shangguin.StartsWith("g") || shangguin.StartsWith("x") || shangguin.StartsWith("ŋ")) && shangguin.Contains("lˤø"))
+                                    ws.Cells["G" + (k + 1).ToString()].Value = shangguin.Replace("lˤø", "ˤø");
+                            }
+                        }
+                    }
+                }
+            }
+            wb.Save(@"D:\shangguliin.xlsx");
+            
         }
     }
 }
