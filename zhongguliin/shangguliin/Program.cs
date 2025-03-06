@@ -19,7 +19,8 @@ namespace zhongguliin
             //List<string> jaenzu = new List<string>() { "見", "溪", "羣", "疑", "群", "曉", "匣", "影" };
             try
             {
-                Hao2Siao1();
+                Si5Mä5();
+                //Hao2Siao1();
                 //gae3chen2guae5zi5in1biao1();
                 //Console.TreatControlCAsInput = true;
 
@@ -541,6 +542,41 @@ namespace zhongguliin
             }
             wb.Save(@"D:\shangguliin.xlsx");
             
+        }
+
+        private static void Si5Mä5()
+        {
+            Workbook wb = new Workbook(@"D:\《廣韻》形聲考李.xlsx");//上古表
+            Worksheet ws = wb.Worksheets[0];
+            var dt = ws.Cells.ExportDataTable(0, 0, 9912, 1);
+            int ii;
+            for (int k = 2; k < 9912; k++)
+            {
+                string zhongguüinmu = ws.Cells["I" + (k + 1).ToString()].Value.ToString() + ws.Cells["K" + (k + 1).ToString()].Value.ToString();//K列是中古韻母
+
+                if (ws.Cells["G" + (k + 1).ToString()].Value != null)
+                {
+                    string shangguin = ws.Cells["G" + (k + 1).ToString()].Value.ToString();//G列是上古擬音
+                    
+                    if ( zhongguüinmu == "二麥")
+                    {
+                        if (shangguin.Contains("ak"))
+                        {                          
+                            ws.Cells["G" + (k + 1).ToString()].Value = shangguin.Replace("ak", "ɛk");
+                        }
+                        
+                    }
+                    else if (zhongguüinmu == "三陌" || zhongguüinmu == "二陌")
+                    {
+                        if (shangguin.Contains("ɛk"))
+                        {
+                            ws.Cells["G" + (k + 1).ToString()].Value = shangguin.Replace("ɛk", "ak");
+                        }
+                    }
+                }
+            }
+            wb.Save(@"D:\shangguliin.xlsx");
+
         }
     }
 }
