@@ -1126,7 +1126,7 @@
 勬,küän,küä̀n,,,,,,
 厥,küët,küot,,,,,,
 孒,küët,küot,,,,,,
-孓,kyóng,küot,,,,,,訓“拱”
+孓,küot,kyóng,,,,,,居月切非居甬切
 橜,küot,güot,,,,,,
 橛,küot,güot,,,,,,
 撅,küot,güot,,,,,,
@@ -1333,7 +1333,7 @@
 哴,lang,lyàng,,,,,,
 涼,lyang,lyàng,,,,,,
 𦗖,lau,lieu,,,,,,
-寥,liek,lieu,,,,,,
+寥,lieu,liek,,,,,,寂寥疊韻化
 橑,láu,lieu,,,,,,
 簝,lau,lieu,,,,,,
 䜮,lau,lieu,,,,,,
@@ -3877,7 +3877,7 @@
 靪,tieng,tiéng,,,,,,
 𩒝,kón,tién,,,,,,夠殄切非多殄切？
 䀍,dö̀m,khö̀m,,,,,,“𧗜”之誤
-呾,tat,qrat,,,,,,“喝”之誤
+呾,tat,qrat,,,,,,訓“喝”
 㘙,ngram,ngyäk,,,,,,宜蔪切非宜𦻝切？
 奊,xiet,büei,,,,,,一乃“𡔢”之誤一乃挾畦切非扶畦切
 㪻,phüòn,küòn,,,,,,訓“灌”
@@ -3985,7 +3985,7 @@
 煇,hüëi,xuon,xúon,,,,,
 惛,huon,húon,hùon,,,,,
 𡔣,kiet,khiet,xiet,,,,,
-譩,qyëi,qy,qý,,,,,
+譩,qy,qý,qyëi,,,,,於擬切非於機
 斁,dò,tò,jiäk,,,,,
 謷,ngau,ngàu,ngrau,,,,,
 夭,qáu,qyäu,qyä́u,,,,,
@@ -4331,7 +4331,7 @@
 葰,scwá,suö́,svi,,,,,
 㾕,scyn,súon,scým,,,,,訓“瘮”
 𦄼,syú,syóng,süó,,,,,
-絮,tchyò,nyò,syò,,,,,sn
+絮,nyò,syò,tchyò,,,,,的二音sn，第三音扭慮切誤作抽慮切
 𧪞,kap,xap,svit,,,,,“𧧓”之誤或訓“𧧓”
 揗,zjvín,zjvìn,zvin,,,,,
 楯,tchüyn,zjvín,zvin,,,,,
@@ -4675,7 +4675,7 @@
 捘,tshvin,tsuö̀i,tsùon,,,,,
 掫,tsu,tscyú,tsüo,,,,,
 陬,tscyu,tsu,tsüo,,,,,
-咀,tsyó,dzyó,qrat,,,,,“喝”之誤
+咀,tsyó,dzyó,qrat,,,,,“呾”之誤
 怚,tsya,tsyò,dzyó,,,,,
 緅,tscyu,tsu,tsüò,,,,,
 鄹,tscyu,dzüó,zuán,,,,,似矩切非似短切
@@ -4725,7 +4725,7 @@
 㺜,nrau,nau,nong,nyong,,,,
 雺,mung,mòng,myu,mù,,,,
 繆,miu,miù,myu,myuk,,,,上古*-l和*-lk
-媢,máu,màu,mok,mì,,,,莫到切非莫至切？
+媢,máu,màu,mok,mì,,,,明沃切非明次切
 閼,qien,qyän,qyot,qat,,,,
 餲,qràj,xat,qyèj,qat,,,,
 覆,phyù,byù,phyuk,phëk,,,,
@@ -4817,7 +4817,7 @@
 鵃,tiéu,tcrau,tsjiäu,tcyu,,,,
 馶,kiï̀,giï,sjiï̀,tsjiï,,,,
 㨖,tcyḯ,tcyí,tcý,tcyì,,,,
-褫,dcyï,tchyḯ,tchý,dcyḯ,,,,
+褫,dcyï,tchyḯ,dcyḯ,tchý,,,,敕豸切非敕貍切
 薙,zí,zí,thièi,dcyí,,,,
 䥍,tsjì,tsjip,bièi,siät,,,,第三音鐾之誤第四音𨫔之誤
 咮,tcyu,tcyù,tsjüo,tcüò,,,,
@@ -4929,3 +4929,5 @@
 𧴎,byä́u,,,,,,,年䴠切非平麃切
 𩦠,büáng,,,,,,,毗表切非毗養切？
 𠄔,xiéu,,,,,,,幻古字讀胡幻切非胡窈切？訓“淆”？
+敮,hräp,,,,,,,“𢻗”之誤，且取𢻗之反切上字
+䎊,lak,,,,,,,疊韻䎊䎅誤認作互爲異體字
