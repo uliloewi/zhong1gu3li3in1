@@ -17,10 +17,13 @@ namespace zhongguliin
                 Console.WriteLine("生成擬音請按'1'；生成字表請按'2'；生成多音字統計請按'3'；改錄音名計請按'4':");
                 ConsoleKeyInfo cki = Console.ReadKey();
                 var str = cki.Key.ToString();
-                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\\Guangyun_Langjin_Zhonggu.1.0.xlsx");
+                Aspose.Cells.Workbook wk = new Aspose.Cells.Workbook(@"D:\\Guangyun_Langjin_Zhonggu.3.0.xlsx");
                 Worksheet ws = wk.Worksheets[0];
                 var dt = ws.Cells.ExportDataTable(0, 0, 4000, 19);
-                
+                var guw= Gu1W(ws);
+                var feiguw= Gu1W(ws, false);
+
+
                 switch (str.Substring(str.Length - 1))
                 {
                     case "1":
@@ -404,6 +407,56 @@ namespace zhongguliin
             }
             return res;
         }
+
+        static List<string> Gu1W(Worksheet ws, bool guHokou = true)//獲得所有無對映開口音節的帶ʷ音節
+        {
+            Dictionary<string, string> den3 = new Dictionary<string, string>()
+            {
+                {"u","" }, {"w","r" }, {"ü","y" }, {"v","i" }
+            };
+            List<string> res = new List<string>();
+            List<string> soIouHoKou = new List<string>();
+
+            for (int row = 0; row <= ws.Cells.MaxDataRow; row++)
+            {
+                if (ws.Cells[row, 10].Value != null && ws.Cells[row, 4].Value.ToString().Contains("合") && den3.Any(x=>ws.Cells[row, 10].Value.ToString().Contains(x.Key)))
+                {
+                    var hoKou = ws.Cells[row, 10].Value?.ToString();//合口
+                    if (!soIouHoKou.Contains(hoKou))
+                    {
+                        soIouHoKou.Add(hoKou);
+                        var d=den3.First(x => hoKou.Contains(x.Key)).Key;
+                        var käKow = ws.Cells[row, 10].Value?.ToString().Replace(d, den3[d]).Trim();
+                        bool found = false;
+                        for (int row1 = 0; row1 <= ws.Cells.MaxDataRow; row1++)
+                        {
+                            if (ws.Cells[row1, 10].Value != null && ws.Cells[row1, 10].Value.ToString().Trim() == käKow)
+                            {
+                                found = true;
+                            }
+                        }
+                        if (guHokou)//無對映開口音節，如止有ɣʷat、nʷˤət，沒ɣat、nˤət
+                        {
+                            if (!found && !res.Contains(hoKou))
+                            {
+                                res.Add(hoKou);
+                            }
+                        }
+                        else//有對映開口音節，如有gʷat、lʷəm，又有gat、ləm
+                        {
+                            if (found && !res.Contains(hoKou))
+                            {
+                                res.Add(hoKou);
+                            }
+                        }
+                    }
+                }
+            }
+            return res;
+        }
+
+
+
     }
 }
 
