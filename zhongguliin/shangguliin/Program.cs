@@ -546,7 +546,7 @@ namespace zhongguliin
 
         private static void Si5Mä5()
         {
-            Workbook wb = new Workbook(@"D:\《廣韻》形聲考李.xlsx");//上古表
+            Workbook wb = new Workbook(@"D:\MyDocument\音韻學\st sk\探索圓脣無介音W\a.xlsx");//上古表
             Worksheet ws = wb.Worksheets[0];
             var dt = ws.Cells.ExportDataTable(0, 0, 9912, 1);
             int ii;
@@ -579,9 +579,9 @@ namespace zhongguliin
 
         }
 
-        private static void Si5Mä5()
+        private static void Si5Mä5II()
         {
-            Workbook wb = new Workbook(@"D:\《廣韻》形聲考李.xlsx");//上古表
+            Workbook wb = new Workbook(@"D:\MyDocument\音韻學\st sk\探索圓脣無介音W\a.xlsx");//上古表
             Worksheet ws = wb.Worksheets[0];
             var dt = ws.Cells.ExportDataTable(0, 0, 9912, 1);
             int ii;
