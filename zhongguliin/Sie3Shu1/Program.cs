@@ -7,7 +7,7 @@ using Microsoft.Office.Interop.Word;
 Console.WriteLine("Hello, World!");
 const string uen2jän4ja5 = @"D:\MyDocument\音韻學\st sk\探索圓脣無介音W\";
 Console.OutputEncoding = Encoding.UTF8;
-Workbook wk = new Workbook(uen2jän4ja5 + "a.xlsx");
+Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考.xlsx");
 Worksheet ws = wk.Worksheets[0];
 //CheckDen(ws);
 //int length = CheckDoubleMapping(ws);
@@ -116,7 +116,7 @@ static void AddParagraph(Document doc, string text, int bold, int spaceBefore)
 
 static void WriteFromExcelToWord(Worksheet ws, int colIndex, Document doc)
 {
-    int cnt = 525;
+    int cnt = 1;
     for (int row = 2; row <= ws.Cells.MaxDataRow; row++)
     {
         var cell = ws.Cells[row, colIndex];
@@ -230,7 +230,7 @@ static void CopyCell(Worksheet ws, Microsoft.Office.Interop.Word.Row wordRow, Ta
             if (redChars.Length > 0)
             {
                 Microsoft.Office.Interop.Word.Range firstPart = wordRow.Cells[wcol].Range.Characters[1]; // Start
-                firstPart.End = tryCatch(wordRow.Cells[wcol].Range, wordRow, wcol, redChars.Length);
+                firstPart.End = tryCatch( wordRow, wcol, redChars.Length);
                 firstPart.Font.Italic = 0;
                 firstPart.Font.Bold = 1;
                 firstPart.Font.Color = WdColor.wdColorRed;
@@ -244,7 +244,7 @@ static void CopyCell(Worksheet ws, Microsoft.Office.Interop.Word.Row wordRow, Ta
             {
                 int start = 1;
                 Microsoft.Office.Interop.Word.Range lastPart = TryCatchRange(wordRow, wcol, textLength - yellowChars.Length + 1, ref start);
-                lastPart.End = tryCatch(wordRow.Cells[wcol].Range, wordRow, wcol, textLength);//wordRow.Cells[wcol].Range.Characters[textLength].End; // Last char
+                lastPart.End = tryCatch( wordRow, wcol, textLength);//wordRow.Cells[wcol].Range.Characters[textLength].End; // Last char
                 lastPart.Font.Bold = 0;
                 lastPart.Font.Italic = 1;
                 lastPart.Font.Color = WdColor.wdColorOrange;
@@ -257,7 +257,7 @@ static void CopyCell(Worksheet ws, Microsoft.Office.Interop.Word.Row wordRow, Ta
                 Microsoft.Office.Interop.Word.Range normalPart = TryCatchRange( wordRow, wcol, redChars.Length + 1, ref start);
                 if (start > -1)
                 {
-                    normalPart.End = tryCatch(wordRow.Cells[wcol].Range, wordRow, wcol, textLength - yellowChars.Length);
+                    normalPart.End = tryCatch(wordRow, wcol, textLength - yellowChars.Length);
                     normalPart.Font.Bold = 0;
                     normalPart.Font.Italic = 0;
                     normalPart.Font.Color = WdColor.wdColorBlack;
@@ -268,7 +268,7 @@ static void CopyCell(Worksheet ws, Microsoft.Office.Interop.Word.Row wordRow, Ta
     }
 }
 
-static int tryCatch(Microsoft.Office.Interop.Word.Range part, Microsoft.Office.Interop.Word.Row wordRow, int wcol, int length)
+static int tryCatch(Microsoft.Office.Interop.Word.Row wordRow, int wcol, int length)
 {
 
     int charaEnd=0;
@@ -279,48 +279,7 @@ static int tryCatch(Microsoft.Office.Interop.Word.Range part, Microsoft.Office.I
     }
     catch
     {
-        try { 
-        charaEnd = wordRow.Cells[wcol].Range.Characters[length - 1].End;
-        }
-        catch {
-            try
-            {
-                charaEnd = wordRow.Cells[wcol].Range.Characters[length - 2].End;
-            }
-            catch
-            {
-                try
-                {
-                    charaEnd = wordRow.Cells[wcol].Range.Characters[length - 3].End;
-                }
-                catch
-                {
-                    try
-                    {
-                        charaEnd = wordRow.Cells[wcol].Range.Characters[length - 4].End;
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            charaEnd = wordRow.Cells[wcol].Range.Characters[length - 5].End;
-                        }
-                        catch
-                        {
-                            try
-                            {
-                                charaEnd = wordRow.Cells[wcol].Range.Characters[length - 6].End;
-                            }
-                            catch
-                            {
-                                Console.WriteLine("TryCatch: Row in Exel" + wcol);
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
+        tryCatch(wordRow, wcol, length - 1);        
     }
     return charaEnd;
 }
@@ -337,56 +296,7 @@ static Microsoft.Office.Interop.Word.Range TryCatchRange(Microsoft.Office.Intero
     }
     catch
     {
-        try
-        {
-
-            start = length - 1;
-            res = wordRow.Cells[wcol].Range.Characters[start];
-        }
-        catch
-        {
-            try
-            {
-                start = length - 2;
-                res = wordRow.Cells[wcol].Range.Characters[start];
-            }
-            catch
-            {
-                try
-                {
-                    start = length - 3;
-                    res = wordRow.Cells[wcol].Range.Characters[start];
-                }
-                catch
-                {
-                    try
-                    {
-                        start = length - 4;
-                        res = wordRow.Cells[wcol].Range.Characters[start];
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            start = length - 5;
-                            res = wordRow.Cells[wcol].Range.Characters[start];
-                        }
-                        catch
-                        {
-                            try
-                            {
-                                start = length - 6;
-                                res = wordRow.Cells[wcol].Range.Characters[start];
-                            }
-                            catch
-                            {
-                                Console.WriteLine("TryCatchRange: Row in Exel" + wcol);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        res = TryCatchRange(wordRow, wcol, length - 1, ref start);
     }
     return res;
 }
