@@ -287,6 +287,8 @@ static int tryCatch(Microsoft.Office.Interop.Word.Row wordRow, int wcol, int len
 static Microsoft.Office.Interop.Word.Range TryCatchRange(Microsoft.Office.Interop.Word.Row wordRow, int wcol, int length, ref int start)
 {
 
+	if(start==-1)
+		return null;
     Microsoft.Office.Interop.Word.Range res = wordRow.Cells[wcol].Range.Characters[start];
     start = -1;
     try
