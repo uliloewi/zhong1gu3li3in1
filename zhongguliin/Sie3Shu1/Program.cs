@@ -11,15 +11,17 @@ Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考.xlsx");
 Worksheet ws = wk.Worksheets[0];
 //CheckDen(ws);
 //int length = CheckDoubleMapping(ws);
+var vinjo = Svwn3Chu5Vin4Jo5Zy5("垑".ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
+var dievin = Svwn3Chu5Die5Yun4Zy5("垑".ToList(), uen2jän4ja5 + "連綿詞 上古 & 中古 thru AllListsShareCommonElement.txt");
 
-Application wordApp = new Application();        
+Application wordApp = new Application();
 
-Document wordDoc = wordApp.Documents.Open(uen2jän4ja5+ "a.docx");
+Document wordDoc = wordApp.Documents.Open(uen2jän4ja5 + "a.docx");
 
 // Perform operations with the document here (e.g., read text)
 Console.WriteLine("Document opened: " + wordDoc.Name);
 
-WriteFromExcelToWord(ws,0,wordDoc);
+WriteFromExcelToWord(ws, 0, wordDoc);
 //Add(wordDoc);
 
 wordDoc.Save();
@@ -116,7 +118,7 @@ static void AddParagraph(Document doc, string text, int bold, int spaceBefore)
 
 static void WriteFromExcelToWord(Worksheet ws, int colIndex, Document doc)
 {
-    int cnt = 1;
+    int cnt = 525;
     for (int row = 2; row <= ws.Cells.MaxDataRow; row++)
     {
         var cell = ws.Cells[row, colIndex];
@@ -147,8 +149,8 @@ static void WriteFromExcelToWord(Worksheet ws, int colIndex, Document doc)
         AddParagraph(doc, "上表有0個字值得細説：", 0, 10);
     }
 
-   
-    
+
+
 }
 
 static Table CopyTable(Document doc)
@@ -230,7 +232,7 @@ static void CopyCell(Worksheet ws, Microsoft.Office.Interop.Word.Row wordRow, Ta
             if (redChars.Length > 0)
             {
                 Microsoft.Office.Interop.Word.Range firstPart = wordRow.Cells[wcol].Range.Characters[1]; // Start
-                firstPart.End = tryCatch( wordRow, wcol, redChars.Length);
+                firstPart.End = tryCatch(wordRow.Cells[wcol].Range, wordRow, wcol, redChars.Length);
                 firstPart.Font.Italic = 0;
                 firstPart.Font.Bold = 1;
                 firstPart.Font.Color = WdColor.wdColorRed;
@@ -244,7 +246,7 @@ static void CopyCell(Worksheet ws, Microsoft.Office.Interop.Word.Row wordRow, Ta
             {
                 int start = 1;
                 Microsoft.Office.Interop.Word.Range lastPart = TryCatchRange(wordRow, wcol, textLength - yellowChars.Length + 1, ref start);
-                lastPart.End = tryCatch( wordRow, wcol, textLength);//wordRow.Cells[wcol].Range.Characters[textLength].End; // Last char
+                lastPart.End = tryCatch(wordRow.Cells[wcol].Range, wordRow, wcol, textLength);//wordRow.Cells[wcol].Range.Characters[textLength].End; // Last char
                 lastPart.Font.Bold = 0;
                 lastPart.Font.Italic = 1;
                 lastPart.Font.Color = WdColor.wdColorOrange;
@@ -253,25 +255,25 @@ static void CopyCell(Worksheet ws, Microsoft.Office.Interop.Word.Row wordRow, Ta
 
             if (textLength - redChars.Length > yellowChars.Length)
             {
-                int start=1;
-                Microsoft.Office.Interop.Word.Range normalPart = TryCatchRange( wordRow, wcol, redChars.Length + 1, ref start);
+                int start = 1;
+                Microsoft.Office.Interop.Word.Range normalPart = TryCatchRange(wordRow, wcol, redChars.Length + 1, ref start);
                 if (start > -1)
                 {
-                    normalPart.End = tryCatch(wordRow, wcol, textLength - yellowChars.Length);
+                    normalPart.End = tryCatch(wordRow.Cells[wcol].Range, wordRow, wcol, textLength - yellowChars.Length);
                     normalPart.Font.Bold = 0;
                     normalPart.Font.Italic = 0;
                     normalPart.Font.Color = WdColor.wdColorBlack;
                     SetFontForMainCharracters(wcol, normalPart);
                 }
             }
-        }        
+        }
     }
 }
 
-static int tryCatch(Microsoft.Office.Interop.Word.Row wordRow, int wcol, int length)
+static int tryCatch(Microsoft.Office.Interop.Word.Range part, Microsoft.Office.Interop.Word.Row wordRow, int wcol, int length)
 {
 
-    int charaEnd=0;
+    int charaEnd = 0;
     try
     {
 
@@ -279,7 +281,50 @@ static int tryCatch(Microsoft.Office.Interop.Word.Row wordRow, int wcol, int len
     }
     catch
     {
-        tryCatch(wordRow, wcol, length - 1);        
+        try
+        {
+            charaEnd = wordRow.Cells[wcol].Range.Characters[length - 1].End;
+        }
+        catch
+        {
+            try
+            {
+                charaEnd = wordRow.Cells[wcol].Range.Characters[length - 2].End;
+            }
+            catch
+            {
+                try
+                {
+                    charaEnd = wordRow.Cells[wcol].Range.Characters[length - 3].End;
+                }
+                catch
+                {
+                    try
+                    {
+                        charaEnd = wordRow.Cells[wcol].Range.Characters[length - 4].End;
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            charaEnd = wordRow.Cells[wcol].Range.Characters[length - 5].End;
+                        }
+                        catch
+                        {
+                            try
+                            {
+                                charaEnd = wordRow.Cells[wcol].Range.Characters[length - 6].End;
+                            }
+                            catch
+                            {
+                                Console.WriteLine("TryCatch: Row in Exel" + wcol);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
     }
     return charaEnd;
 }
@@ -287,8 +332,6 @@ static int tryCatch(Microsoft.Office.Interop.Word.Row wordRow, int wcol, int len
 static Microsoft.Office.Interop.Word.Range TryCatchRange(Microsoft.Office.Interop.Word.Row wordRow, int wcol, int length, ref int start)
 {
 
-	if(start==-1)
-		return null;
     Microsoft.Office.Interop.Word.Range res = wordRow.Cells[wcol].Range.Characters[start];
     start = -1;
     try
@@ -298,7 +341,56 @@ static Microsoft.Office.Interop.Word.Range TryCatchRange(Microsoft.Office.Intero
     }
     catch
     {
-        res = TryCatchRange(wordRow, wcol, length - 1, ref start);
+        try
+        {
+
+            start = length - 1;
+            res = wordRow.Cells[wcol].Range.Characters[start];
+        }
+        catch
+        {
+            try
+            {
+                start = length - 2;
+                res = wordRow.Cells[wcol].Range.Characters[start];
+            }
+            catch
+            {
+                try
+                {
+                    start = length - 3;
+                    res = wordRow.Cells[wcol].Range.Characters[start];
+                }
+                catch
+                {
+                    try
+                    {
+                        start = length - 4;
+                        res = wordRow.Cells[wcol].Range.Characters[start];
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            start = length - 5;
+                            res = wordRow.Cells[wcol].Range.Characters[start];
+                        }
+                        catch
+                        {
+                            try
+                            {
+                                start = length - 6;
+                                res = wordRow.Cells[wcol].Range.Characters[start];
+                            }
+                            catch
+                            {
+                                Console.WriteLine("TryCatchRange: Row in Exel" + wcol);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     return res;
 }
@@ -310,4 +402,67 @@ static void SetFontForMainCharracters(int wcol, Microsoft.Office.Interop.Word.Ra
         r.Font.Size = 14;
         r.Font.Name = "SimSun";
     }
+}
+
+static List<string> Svwn3Chu5Vin4Jo5Zy5(List<char> zy, Workbook vinjobiao)//選出韻腳字
+{
+    string so3iou3vin4jo5zy4 = So3Iou3Vin4Jo5(vinjobiao);
+    List<string> res = new List<string>();
+    for (int i = 0; i < zy.Count; i++)
+    {
+        var c = zy[i];
+        string hangzy = c.ToString();
+        if (((short)c) > -20000 && ((short)c) < 0)
+        {
+            hangzy = c.ToString() + zy[i + 1];
+            i++;
+        }
+        Console.WriteLine(hangzy);
+        if (!"(=)12".Contains(c) && !res.Contains(hangzy) && so3iou3vin4jo5zy4.Contains(hangzy))
+            res.Add(hangzy.ToString());
+    }
+    return res;
+}
+
+static string So3Iou3Vin4Jo5(Workbook wb)//獲得所有韻腳字
+{
+    string gong1zo5bu4so3iou3zy4 = "";
+    foreach (Worksheet ws in wb.Worksheets)
+    {
+        for (int row = 0; row <= ws.Cells.MaxDataRow; row++)
+        {
+            if (ws.Cells[row, 0].Value == null || ws.Cells[row, 0].Value.ToString().Contains("出韻") || ws.Cells[row, 0].Value.ToString().Contains("押韻")) break;
+            for (int col = 1; col <= ws.Cells.MaxDataColumn; col++)
+            {
+                var value = ws.Cells[row, col].StringValue;
+                if (!string.IsNullOrEmpty(value) && !gong1zo5bu4so3iou3zy4.Contains(value))
+                {
+                    gong1zo5bu4so3iou3zy4 += value;
+                }
+            }
+        }
+    }
+    return gong1zo5bu4so3iou3zy4;
+}
+
+List<string> Svwn3Chu5Die5Yun4Zy5(List<char> zy, string die5vin4path)
+{
+    string text = File.ReadAllText(die5vin4path);
+    List<string> res = new List<string>();
+    for (int i = 0; i < zy.Count; i++)
+    {
+        var c = zy[i];
+        string hangzy = c.ToString();
+        if (((short)c) > -20000 && ((short)c) < 0)
+        {
+            hangzy = c.ToString() + zy[i + 1];
+            i++;
+        }
+        if (!res.Contains(hangzy) && text.Contains(hangzy))
+        {
+            res.Add(hangzy.ToString());
+            Console.Write(hangzy);
+        }
+    }
+    return res;
 }
