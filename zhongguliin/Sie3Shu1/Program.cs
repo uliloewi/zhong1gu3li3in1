@@ -10,9 +10,11 @@ Console.OutputEncoding = Encoding.UTF8;
 Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考.xlsx");
 Worksheet ws = wk.Worksheets[0];
 //CheckDen(ws);
-//int length = CheckDoubleMapping(ws);
-var vinjo = Svwn3Chu5Vin4Jo5Zy5("垑".ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
-var dievin = Svwn3Chu5Die5Yun4Zy5("垑".ToList(), uen2jän4ja5 + "連綿詞 上古 & 中古 thru AllListsShareCommonElement.txt");
+int length = CheckDoubleMapping(ws);
+var vinjo = Svwn3Chu5Vin4Jo5Zy5(@"竇".ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
+var dievin = Svwn3Chu5Die5Yun4Zy5(@"竇".ToList(), uen2jän4ja5 + "連綿詞 上古 & 中古 thru AllListsShareCommonElement.txt");
+
+var tong1ja3 = Svwn3Chu5Die5Yun4Zy5(@"竇".ToList(), uen2jän4ja5 + @"sieshu\通假字.txt");
 
 Application wordApp = new Application();
 
@@ -404,24 +406,10 @@ static void SetFontForMainCharracters(int wcol, Microsoft.Office.Interop.Word.Ra
     }
 }
 
-static List<string> Svwn3Chu5Vin4Jo5Zy5(List<char> zy, Workbook vinjobiao)//選出韻腳字
+List<string> Svwn3Chu5Vin4Jo5Zy5(List<char> zy, Workbook vinjobiao)//選出韻腳字
 {
     string so3iou3vin4jo5zy4 = So3Iou3Vin4Jo5(vinjobiao);
-    List<string> res = new List<string>();
-    for (int i = 0; i < zy.Count; i++)
-    {
-        var c = zy[i];
-        string hangzy = c.ToString();
-        if (((short)c) > -20000 && ((short)c) < 0)
-        {
-            hangzy = c.ToString() + zy[i + 1];
-            i++;
-        }
-        Console.WriteLine(hangzy);
-        if (!"(=)12".Contains(c) && !res.Contains(hangzy) && so3iou3vin4jo5zy4.Contains(hangzy))
-            res.Add(hangzy.ToString());
-    }
-    return res;
+    return Uen3Jwn4Li3Sou1Zy4(zy, so3iou3vin4jo5zy4);
 }
 
 static string So3Iou3Vin4Jo5(Workbook wb)//獲得所有韻腳字
@@ -448,7 +436,13 @@ static string So3Iou3Vin4Jo5(Workbook wb)//獲得所有韻腳字
 List<string> Svwn3Chu5Die5Yun4Zy5(List<char> zy, string die5vin4path)
 {
     string text = File.ReadAllText(die5vin4path);
+    return Uen3Jwn4Li3Sou1Zy4(zy, text);
+}
+
+List<string> Uen3Jwn4Li3Sou1Zy4(List<char> zy, string text)//文件裏搜字，一串字中哪些在文件中
+{
     List<string> res = new List<string>();
+    List<string> bu5chong2di5zy4 = new List<string>();
     for (int i = 0; i < zy.Count; i++)
     {
         var c = zy[i];
@@ -458,11 +452,12 @@ List<string> Svwn3Chu5Die5Yun4Zy5(List<char> zy, string die5vin4path)
             hangzy = c.ToString() + zy[i + 1];
             i++;
         }
-        if (!res.Contains(hangzy) && text.Contains(hangzy))
+        if (!"(=)12".Contains(c) && !bu5chong2di5zy4.Contains(hangzy) && !res.Contains(hangzy) && text.Contains(hangzy))
         {
             res.Add(hangzy.ToString());
             Console.Write(hangzy);
         }
+        bu5chong2di5zy4.Add(hangzy);
     }
     return res;
 }
