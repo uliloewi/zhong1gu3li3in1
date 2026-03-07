@@ -11,10 +11,9 @@ Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考.xlsx");
 Worksheet ws = wk.Worksheets[0];
 //CheckDen(ws);
 int length = CheckDoubleMapping(ws);
-var vinjo = Svwn3Chu5Vin4Jo5Zy5(@"竇".ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
-var dievin = Svwn3Chu5Die5Yun4Zy5(@"竇".ToList(), uen2jän4ja5 + "連綿詞 上古 & 中古 thru AllListsShareCommonElement.txt");
-
-var tong1ja3 = Svwn3Chu5Die5Yun4Zy5(@"竇".ToList(), uen2jän4ja5 + @"sieshu\通假字.txt");
+var vinjo = Svwn3Chu5Vin4Jo5Zy5(@"譮㖑欸䜕噧𡘌".ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
+var dievin = Svwn3Chu5Die5Yun4Zy5(@"譮㖑欸䜕噧𡘌".ToList(), uen2jän4ja5 + "連綿詞 上古 & 中古 thru AllListsShareCommonElement.txt");
+var tong1ja3 = Svwn3Chu5Die5Yun4Zy5(@"譮㖑欸䜕噧𡘌".ToList(), uen2jän4ja5 + @"sieshu\通假字.txt");
 
 Application wordApp = new Application();
 
@@ -459,5 +458,6 @@ List<string> Uen3Jwn4Li3Sou1Zy4(List<char> zy, string text)//文件裏搜字，�
         }
         bu5chong2di5zy4.Add(hangzy);
     }
+    Console.WriteLine();
     return res;
 }
