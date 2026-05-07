@@ -6,37 +6,7 @@ using Microsoft.Office.Interop.Word;
 
 Console.WriteLine("Hello, World!");
 const string uen2jän4ja5 = @"D:\MyDocument\音韻學\st sk\探索圓脣無介音W\liänmiän\";
-const string cha2 = @"闍都𥳉𧷿醏
-褚𡪄
-楮褚
-堵楮𥀁覩睹暏賭帾
-𥀁
-堵者赭
-觰𧬅譇
-觰
-䣝瘏
-𨼑䠧䣝
-諸㸙
-諸藷𧄔櫧㶆䃴蠩
-𧄔
-藷署薯曙
-䰞煑陼渚緒
-緒
-䬡翥䘄
-屠
-藸豬䐗猪瀦櫫
-藸躇儲𦿀著屠
-著
-著
-著𥗁櫡鐯𣃈擆
-著
-奲㨋䰩撦
-箸
-箸
-奢
-書
-暑
-鷵廜";
+const string cha2 = @"闍都𥳉𧷿醏";
 //    @"䳇毋𢜮膴武珷碔鵡娬母拇胟畮𤝕𤵝踇𧿹𠭇畞畝敏貿鄮䳇呣姆苺(莓)某謀莽䓮雺矛袤楙懋𦼪茂戊牡毛芼旄髦𣹪氂枆酕耄𧂕𩿂覒㲝䋃眊媢冃蓩㮘堥";
 Console.OutputEncoding = Encoding.UTF8;
 Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考.xlsx");
