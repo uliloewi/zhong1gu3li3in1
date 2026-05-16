@@ -4,41 +4,42 @@ using System.Text;
 using Aspose.Cells;
 using Microsoft.Office.Interop.Word;
 
-Console.WriteLine("Hello, World!");
 const string uen2jän4ja5 = @"D:\MyDocument\音韻學\st sk\探索圓脣無介音W\liänmiän\";
-const string cha2 = @"闍都𥳉𧷿醏";
 //    @"䳇毋𢜮膴武珷碔鵡娬母拇胟畮𤝕𤵝踇𧿹𠭇畞畝敏貿鄮䳇呣姆苺(莓)某謀莽䓮雺矛袤楙懋𦼪茂戊牡毛芼旄髦𣹪氂枆酕耄𧂕𩿂覒㲝䋃眊媢冃蓩㮘堥";
 Console.OutputEncoding = Encoding.UTF8;
-Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考.xlsx");
+Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考t.xlsx");
 Worksheet ws = wk.Worksheets[0];
 //CheckDen(ws);
 int length = CheckDoubleMapping(ws);
 
 
 //var vinbu2denvin = shang4gu3duei4zhong1gu3(ws, length);
+/*const string cha2 = @"闍都𥳉𧷿醏";
 
-//var vinjo = Svwn3Chu5Vin4Jo5Zy5(cha2.ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
+var vinjo = Svwn3Chu5Vin4Jo5Zy5(cha2.ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
 Console.WriteLine("以上韻脚字");
 
 var dievin = Svwn3Chu5Die5Yun4Zy5(cha2.ToList(), uen2jän4ja5 + "260409連綿字.txt");
 Console.WriteLine("以上連綿字");
 
 var tong1ja3 = Svwn3Chu5Die5Yun4Zy5(cha2.ToList(), uen2jän4ja5 + "260409通假異體字.txt");
-Console.WriteLine("以上通假異體字");
+
+
+Console.WriteLine("以上通假異體字");*/
 
 Application wordApp = new Application();
 
-Document wordDoc = wordApp.Documents.Open(uen2jän4ja5 + "a.docx");
+//Document wordDoc = wordApp.Documents.Open(uen2jän4ja5 + "a.docx");
 
 // Perform operations with the document here (e.g., read text)
-Console.WriteLine("Document opened: " + wordDoc.Name);
+//Console.WriteLine("Document opened: " + wordDoc.Name);
 
-WriteFromExcelToWord(ws, 0, wordDoc);
+WriteFromExcelToWord(ws, 0, wordApp);
 //Add(wordDoc);
 
-wordDoc.Save();
+//wordDoc.SaveAs(uen2jän4ja5 + "a1.docx");
 // 3. Close the document and save changes if necessary
-wordDoc.Close();
+//wordDoc.Close();
 
 static int CheckDoubleMapping(Worksheet ws)
 {
@@ -128,11 +129,15 @@ static void AddParagraph(Document doc, string text, int bold, int spaceBefore)
 
 }
 
-static void WriteFromExcelToWord(Worksheet ws, int colIndex, Document doc)
+static void WriteFromExcelToWord(Worksheet ws, int colIndex, Application wordApp)
 {
-    int cnt = 525;
+    int cnt = 1;
+    int suang4Shen1pang2= 0;
+    Document doc = null ;
     for (int row = 2; row <= ws.Cells.MaxDataRow; row++)
     {
+        if (suang4Shen1pang2 == 0)
+            doc = wordApp.Documents.Open(uen2jän4ja5 + "a.docx");
         var cell = ws.Cells[row, colIndex];
         if (cell == null || cell.Value == null) return;
         string shenpang = cell.Value.ToString().Replace("|", "”“");//如：聲旁“丿”“乀”
@@ -140,6 +145,7 @@ static void WriteFromExcelToWord(Worksheet ws, int colIndex, Document doc)
         AddParagraph(doc, paraTitle, 1, 40);//如：2. 聲旁“丿”“乀”
         Console.WriteLine(paraTitle);
         cnt++;
+        suang4Shen1pang2++;
         AddParagraph(doc, "這族形聲字在上古的聲母", 0, 10);
         Table currentTable = CopyTable(doc);
         if (cell.IsMerged)
@@ -159,10 +165,13 @@ static void WriteFromExcelToWord(Worksheet ws, int colIndex, Document doc)
         }
 
         AddParagraph(doc, "上表有0個字值得細説：", 0, 10);
+        if (suang4Shen1pang2>250 || row == ws.Cells.MaxDataRow)
+        {
+            doc.SaveAs(uen2jän4ja5 + cnt.ToString() + "Sie3Shu5.docx");
+            suang4Shen1pang2 = 0;
+            doc.Close();
+        }
     }
-
-
-
 }
 
 static Table CopyTable(Document doc)
