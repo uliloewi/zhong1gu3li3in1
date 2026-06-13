@@ -7,14 +7,14 @@ using Microsoft.Office.Interop.Word;
 const string uen2jän4ja5 = @"D:\MyDocument\音韻學\st sk\探索圓脣無介音W\liänmiän\";
 //    @"䳇毋𢜮膴武珷碔鵡娬母拇胟畮𤝕𤵝踇𧿹𠭇畞畝敏貿鄮䳇呣姆苺(莓)某謀莽䓮雺矛袤楙懋𦼪茂戊牡毛芼旄髦𣹪氂枆酕耄𧂕𩿂覒㲝䋃眊媢冃蓩㮘堥";
 Console.OutputEncoding = Encoding.UTF8;
-Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考t.xlsx");
+Workbook wk = new Workbook(uen2jän4ja5 + "廣韻字上古音形考.xlsx");
 Worksheet ws = wk.Worksheets[0];
 //CheckDen(ws);
 int length = CheckDoubleMapping(ws);
 
 
 //var vinbu2denvin = shang4gu3duei4zhong1gu3(ws, length);
-/*const string cha2 = @"闍都𥳉𧷿醏";
+const string cha2 = @"僾靉靆靉靅";
 
 var vinjo = Svwn3Chu5Vin4Jo5Zy5(cha2.ToList(), new Workbook(uen2jän4ja5 + "上古韻腳（已修）.xlsx"));
 Console.WriteLine("以上韻脚字");
@@ -25,7 +25,7 @@ Console.WriteLine("以上連綿字");
 var tong1ja3 = Svwn3Chu5Die5Yun4Zy5(cha2.ToList(), uen2jän4ja5 + "260409通假異體字.txt");
 
 
-Console.WriteLine("以上通假異體字");*/
+Console.WriteLine("以上通假異體字");
 
 Application wordApp = new Application();
 
