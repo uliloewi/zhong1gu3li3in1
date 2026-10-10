@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shangguliin", "shangguliin\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sie3Shu1", "Sie3Shu1\Sie3Shu1.csproj", "{F4024778-050B-A885-52F7-3350391B9C10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lang2Jin1Du5Shu1In1", "Lang2Jin1Du5Shu1In1\Lang2Jin1Du5Shu1In1.csproj", "{A4FF8C8E-920F-4936-8FFB-0BEEB87E79C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F4024778-050B-A885-52F7-3350391B9C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4024778-050B-A885-52F7-3350391B9C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4024778-050B-A885-52F7-3350391B9C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4FF8C8E-920F-4936-8FFB-0BEEB87E79C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4FF8C8E-920F-4936-8FFB-0BEEB87E79C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4FF8C8E-920F-4936-8FFB-0BEEB87E79C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4FF8C8E-920F-4936-8FFB-0BEEB87E79C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
