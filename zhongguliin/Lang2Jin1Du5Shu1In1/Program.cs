@@ -16,6 +16,24 @@ if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
 
 try
 {
+    string csvPath = uen2jän4ja5 + "langjin.dict.yaml";
+    if (File.Exists(csvPath))
+    {
+        foreach (var zhu4 in "書白古訓假雅後")
+        {
+
+            int moved = ReorderLinesBySuffix(csvPath, "\t"+zhu4, "#"+zhu4, Encoding.UTF8);
+        }
+        //Console.WriteLine($"Zeilen mit Suffix 'qq' verschoben: {moved}");
+    }
+    else
+    {
+        //Console.WriteLine($"CSV-Datei nicht gefunden: {csvPath}");
+    }
+
+
+
+
     var results = ExtractBeforeChar(path, '】', Encoding.UTF8);
     List<string[]> zy4zhu4List = new List<string[]>(); ;
     Console.WriteLine($"Gefundene Zeilen: {results.Count}");
@@ -23,15 +41,21 @@ try
     {//獲得所有帶標注的字，如“昨 zo5 文”
         var line = item.Replace("【", " "); // Entfernt Leerzeichen)
         var zyinzhu=line.Split(' ');
-        string zy = zyinzhu[0].Replace(")", "").Replace("(", "");
-       
+        string zy = zyinzhu[0].Contains("(")? zyinzhu[0].Substring(0, zyinzhu[0].IndexOf("(")) : zyinzhu[0];
+        line = zy + " " + zyinzhu[1] + " " + zyinzhu[2];
+        zy4zhu4List.Add(new string[3] { zy, zyinzhu[1], zyinzhu[2] });
+        Console.WriteLine(line);
+        /*
+         string zy = zyinzhu[0].Replace(")", "").Replace("(", "");       
+        
         var itiyz=Uen3Jwn4Li3Sou1Zy4(zy.ToList());
         foreach (var it in itiyz)
         {
             line = it + " " + zyinzhu[1]+ " " + zyinzhu[2];
             zy4zhu4List.Add(new string[3] {it, zyinzhu[1], zyinzhu[2] });
             Console.WriteLine(line);
-        }        
+        }     
+        */
     }
 
     ModifyFile(zy4biao3, zy4zhu4List, Encoding.UTF8);
@@ -106,4 +130,33 @@ List<string> Uen3Jwn4Li3Sou1Zy4(List<char> zy)//漢字串中列出漢字
     }
     Console.WriteLine();
     return res;
+}
+
+/// <summary>
+/// Verschiebt alle Zeilen, die mit dem angegebenen Suffix enden, hinter eine Marker-Zeile.
+/// Backup wird als .bak angelegt. Marker wird nur eingefügt, wenn mindestens eine Zeile verschoben wurde.
+/// </summary>
+static int ReorderLinesBySuffix(string filePath, string suffix, string marker, Encoding encoding)
+{
+    string backupPath = filePath + ".bak";
+    File.Copy(filePath, backupPath, overwrite: true);
+
+    var lines = File.ReadAllLines(filePath, encoding).ToList();
+
+    // Ermitteln der Zeilen, die auf das Suffix enden (Prüfung ohne trailing whitespace)
+    var suffixLines = lines.Where(l => l.TrimEnd().EndsWith(suffix, StringComparison.Ordinal)).ToList();
+    if (suffixLines.Count == 0)
+        return 0;
+
+    // Alle Originalzeilen außer vorhandenen Marker-Zeilen und den Suffixzeilen beibehalten
+    var remaining = lines
+        .Where(l => !l.Trim().Equals(marker, StringComparison.Ordinal) && !l.TrimEnd().EndsWith(suffix, StringComparison.Ordinal))
+        .ToList();
+
+    // Marker und dann die gefundenen Suffix-Zeilen anhängen (Reihenfolge der Suffix-Zeilen bleibt erhalten)
+    remaining.Add(marker);
+    remaining.AddRange( suffixLines.Select(x=> x.Replace(suffix, "")));
+
+    File.WriteAllLines(filePath, remaining, encoding);
+    return suffixLines.Count;
 }
